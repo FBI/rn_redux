@@ -5,8 +5,9 @@ import { PropTypes }  from 'prop-types'
 const NAV_BAR_HEIGHT_IOS = 44;//导航栏在iOS中的高度
 const NAV_BAR_HEIGHT_ANDROID = 50;//导航栏在Android中的高度
 const STATUS_BAR_HEIGHT = DeviceInfo.isIPhoneX_deprecated ? 0 : 20;//状态栏的高度
+
 const StatusBarShape = {//设置状态栏所接受的属性
-    barStyle: PropTypes.oneOf(['light-content', 'default',]),
+    barStyle: PropTypes.oneOf(['light-content', 'default']),
     hidden: PropTypes.bool,
     backgroundColor: PropTypes.string,
 };

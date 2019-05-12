@@ -83,7 +83,7 @@ class PopularTab extends Component {
     let url = this.generateFetchUrl(labelName)
     if(loadMore) {
       onGetPopularListMore(labelName, ++store.pageIndex, pageSize, store.items, callback => {
-        this.refs.toast.shadowRoot('没有更多了啊')
+        this.refs.toast.show('没有更多了啊')
       })
     }else {
       onGetPopularList(url, labelName, pageSize)

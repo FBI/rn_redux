@@ -12,7 +12,7 @@ import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigat
 import { connect } from 'react-redux'
 import DataSource from '../asyncStorage/dataSource'
 import actions from '../action'
-import PopularItem from '../commons/PopularItem'
+import TrendingItem from '../commons/TrendingItem'
 import Toast from 'react-native-easy-toast'
 import NavigationBar from '../commons/NavigationBar'
 const URL = 'https://github.com/trending/';
@@ -23,7 +23,7 @@ export default class TrendingPage extends Component{
   constructor(props) {
     super(props)
     this.dataSource = new DataSource
-    this.tabs = ['Javascript', 'Objective-C', 'Typescript', 'Java', 'Swift', 'Android']
+    this.tabs = ['JavaScript', 'HTML', 'CSS', 'C', 'C++', 'C#']
   }
   createTopTabs() {
     let tab = {}
@@ -81,16 +81,16 @@ class TrendingTab extends Component {
     let store = this.handleStore()
     let url = this.generateFetchUrl(labelName)
     if(loadMore) {
-      onGetTrendingListMore(labelName, ++store.pageIndex, pageSize, store.items, callback => {
-        this.refs.toast.shadowRoot('没有更多了啊')
-      })
+      // onGetTrendingListMore(labelName, ++store.pageIndex, pageSize, store.items, callback => {
+      //   this.refs.toast.show('没有更多了啊')
+      // })
     }else {
       onGetTrendingList(url, labelName, pageSize)
     }
   }
   handleStore() {
-    const { popular, labelName } = this.props
-    let store = popular[labelName]
+    const { trending, labelName } = this.props
+    let store = trending[labelName]
     if(!store) {
       store = {
         items: [],
@@ -105,9 +105,9 @@ class TrendingTab extends Component {
     return URL + labelName + '?since=daily'
   }
   createItem(data) {
-    const item = data.item
-    return <PopularItem
-              item={item}
+    const item = data.TrendingRepoModel
+    return <TrendingItem
+              projectModel={item}
               onPress={() => {}}
            />
   }
@@ -122,6 +122,8 @@ class TrendingTab extends Component {
   }
   render() {
     let store = this.handleStore()
+    console.log('这回是真有数据了')
+    console.log(store.projectModels)
     return (
       <View style={{flex: 1}}>
         <FlatList
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  popular: state.popular
+  trending: state.trending
 })
 const mapDispatchToProps =  dispatch => ({
   onGetTrendingList(url, labelName, pageSize) {

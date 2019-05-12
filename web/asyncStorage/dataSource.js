@@ -53,6 +53,8 @@ export default class DataSource {
             }else {
                 new Trending().fetchTrending(url)
                     .then(items => {
+                        console.log('就是没有数据啊')
+                        console.log(items)
                         if (!items) {
                             throw new Error('responseData is null');
                         }

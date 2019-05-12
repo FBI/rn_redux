@@ -6,7 +6,7 @@ export function getTrendingListActon( url, labelName, pageSize ) {
     return dispatch => {
         dispatch({ type: Types.TRENDING_REFRESH, labelName })
         let dataSource = new DataSource();
-        dataSource.fetchData( url ).then( res => {
+        dataSource.fetchData( url, 'trending' ).then( res => {
             handleRefreshData(Types.TRENDING_REFRESH_SUCCESS, dispatch, labelName, res, pageSize)
         }).catch( error => {
             dispatch({
