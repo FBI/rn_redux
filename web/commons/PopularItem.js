@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 export default class PopularItem extends React.Component {
     render() {
@@ -12,8 +12,8 @@ export default class PopularItem extends React.Component {
                                 onPress={() => {}}
                                 underLayColor={'transparent'}
                              >
-                                <FontAwesome
-                                    name={'angellist'}
+                                <Ionicons
+                                    name={'ios-thumbs-up'}
                                     size={26}
                                     style={{color: 'hotpink'}}
                                 />

@@ -7,13 +7,28 @@
  */
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, View, WebView, DeviceInfo } from 'react-native';
+import NavigationBar from '../commons/NavigationBar'
+import viewsUtil from '../utils/viewsUtil'
+const TRENDING_URL = 'https://github.com/'
 
 export default class DetailPage extends Component{
+  constructor(props) {
+    super(props) 
+    const { fullName } = this.props.navigation.state.params
+    this.url = TRENDING_URL + fullName
+    this.title = fullName
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.desc}>This is the DetailPage</Text>
+        <NavigationBar 
+          leftButton={viewsUtil.getLeftBackButton()}
+          title={this.title}
+        />
+        <WebView
+          source={{url: this.url}}
+        />
       </View>
     );
   }
@@ -22,12 +37,6 @@ export default class DetailPage extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  desc: {
-    color: 'brown',
-    fontSize: 20
+    marginTop: DeviceInfo.isIPhoneX_deprecated ? 30 : 0
   }
 });

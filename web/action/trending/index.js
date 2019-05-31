@@ -48,8 +48,8 @@ export function TrendingLoadMoreAction( labelName, pageIndex, pageSize, dataArra
 // 处理下拉刷新数据
 function handleRefreshData( actionType, dispatch, labelName, data, pageSize ) {
     let fixItems = []
-    if(data && data.data && data.data.items) {
-        fixItems = data.data.items
+    if(data && data.data && data.data) {
+        fixItems = data.data
     }
     dispatch({
         type: actionType,

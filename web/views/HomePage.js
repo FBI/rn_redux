@@ -20,7 +20,8 @@ class HomePage extends Component{
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
   }
-  onPress = () => {
+  // 处理安卓物理返回键
+  onBackPress = () => {
     const { dispatch, nav } = this.props
     if(nav.routes[1].index === 0) return
     dispatch(NavigationActions.back())

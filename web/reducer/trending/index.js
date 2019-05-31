@@ -43,7 +43,8 @@ export default (state = defaultState, action) => {
                     hideLoadingMore: false
                 }
             }
-        case Types.TRENDING_LOAD_MORE_FAIL:// 卡拉加载更多失败
+        case Types.TRENDING_LOAD_MORE_FAIL:// 上拉加载更多失败
+            console.log('是该隐藏了啊')
             return { 
                 ...state,
                 [labelName]: {

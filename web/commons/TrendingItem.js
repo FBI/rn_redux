@@ -1,19 +1,19 @@
 import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import HTMLView from 'react-native-htmlview';
+//import console = require('console');
 
 export default class TrendingItem extends React.Component {
     render() {
-        const { projectModel } = this.props
-        console.log(projectModel)
-        const { item } = projectModel
-        if(!item) return null
-        const { fullName, description, meta, contributors } = item
+        const { projectModel, onSelect } = this.props
+        const { fullName, description, meta, contributors } = projectModel
         let descriptionHTML = '<p>' + description + '</p>';
         return (
-            <TouchableOpacity>
-                <View className={styles['item-container']}>
-                    <Text class={styles['author-name']}>{fullName}</Text>
+            <TouchableOpacity
+                onPress={() => onSelect()}
+            >
+                <View style={styles['item-container']}>
+                    <Text style={styles.autorName}>{fullName}</Text>
                     <HTMLView
                         value={descriptionHTML}
                         onLinkPress={(url) => {
@@ -30,11 +30,11 @@ export default class TrendingItem extends React.Component {
                         <View style={styles.row}>
                             <Text>Built by: </Text>
                             {
-                                contributors.map((result, i, arr) => {
+                                contributors.map((item, i, arr) => {
                                     return <Image
                                         key={i}
                                         style={{height: 22, width: 22, margin: 2}}
-                                        source={{uri: arr[i]}}
+                                        source={{uri: item}}
                                     />
                                 })
                             }
@@ -49,7 +49,7 @@ export default class TrendingItem extends React.Component {
 
 const styles =  StyleSheet.create({
     'item-container': {
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         padding: 10,
         marginLeft: 5,
         marginRight: 5,
@@ -63,7 +63,7 @@ const styles =  StyleSheet.create({
         shadowRadius: 1,
         elevation: 2 // 设置Z轴方向高度
     },
-    'author-name': {
+    autorName: {
         fontSize: 16,
         marginBottom: 2,
         color: '#212121'
