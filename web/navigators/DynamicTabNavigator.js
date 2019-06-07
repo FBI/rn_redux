@@ -17,6 +17,8 @@ import PopularPage from '../views/PopularPage'
 import TrendingPage from '../views/TrendingPage'
 import FavoritePage from '../views/FavoritePage'
 import MyPage from '../views/MyPage'
+import EventBus from 'react-native-event-bus'
+
 const TABS = {
     PopularPage: {
       screen: PopularPage,
@@ -92,7 +94,14 @@ class DynamicTabNavigator extends Component {
   }
   render() {
     const BottomTabNavigator = this.createBottomNavigator()
-    return <BottomTabNavigator />
+    return <BottomTabNavigator 
+              onNavigationStateChange={(prevState, nextState, action) =>{
+                EventBus.getInstance().fireEvent('bottom_tab_change', {
+                  from: prevState.index,
+                  to: nextState.index
+                })
+              }} 
+           />
   }
 }
 class TabBarComponent extends Component {

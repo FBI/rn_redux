@@ -7,7 +7,8 @@
  */
 
 import React, { Component } from 'react';
-import {StyleSheet, View, WebView, DeviceInfo, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, DeviceInfo, TouchableOpacity } from 'react-native';
+import { WebView } from 'react-native-webview'
 import NavigationBar from '../commons/NavigationBar'
 import NavigationUtils from '../navigators/NavigationUtils'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'

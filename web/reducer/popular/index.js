@@ -52,6 +52,14 @@ export default (state = defaultState, action) => {
                     hideLoadingMore: true
                 }
             }
+        case Types.FLUSH_POPULAR_FAVORITE://刷新收藏状态
+            return {
+                ...state,
+                [labelName]: {
+                    ...state[labelName],
+                    projectModels
+                }
+            };
         default: 
             return state
     }

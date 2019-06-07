@@ -22,6 +22,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { connect } from 'react-redux'
 import DataSource, { FLAG_STORAGE } from '../asyncStorage/dataSource'
 import actions from '../action'
+import EventBus from 'react-native-event-bus'
 const URL = 'https://github.com/trending/';
 const THEME_COLOR = 'hotpink'
 const pageSize = 10
@@ -123,25 +124,39 @@ class TrendingTab extends Component {
   constructor(props) {
     super(props) 
     this.timeSpan = this.props.timeSpan
+    this.isFavoriteChange = false
   }
   componentDidMount() {
-    this.getTrendingList()
+    this.loadData()
+    EventBus.getInstance().addListener('favorite_change_trending', this.favoriteListener = () => {
+      this.isFavoriteChange = true
+    })
+    EventBus.getInstance().addListener('bottom_tab_change', this.selectListener = params => {
+      params.to === 1 && this.isFavoriteChange && this.loadData(false,true)
+    })
     this.timeSpanChangeListener = DeviceEventEmitter.addListener('select_timespan', timeSpan => {
       this.timeSpan = timeSpan
-      this.getTrendingList()
+      this.loadData()
     })
   }
   componentWillUnmount() {
     if(this.timeSpanChangeListener)this.timeSpanChangeListenerremove()
+    EventBus.getInstance().removeListener(this.favoriteListener)
+    EventBus.getInstance().removeListener(this.selectListener)
   }
-  getTrendingList(loadMore) {
-    const { onGetTrendingList, onGetTrendingListMore, labelName } = this.props
+  loadData(loadMore,refreshFavorite) {
+    this.getTrendingList(loadMore,refreshFavorite)
+  }
+  getTrendingList(loadMore,refreshFavorite) {
+    const { onGetTrendingList, onGetTrendingListMore, onFlushTrendingFavorite, labelName } = this.props
     let store = this.handleStore()
     let url = this.generateFetchUrl(labelName)
     if(loadMore) {
       onGetTrendingListMore(labelName, ++store.pageIndex, pageSize, store.items, favoriteUtil, callback => {
         this.refs.toast.show('没有更多了啊')
       })
+    }else if(refreshFavorite) {
+      onFlushTrendingFavorite(labelName, store.pageIndex, pageSize, store.items, favoriteUtil)
     }else {
       onGetTrendingList(url, labelName, pageSize, favoriteUtil)
     }
@@ -194,7 +209,7 @@ class TrendingTab extends Component {
               refreshing={store.isLoading}
               color={[THEME_COLOR]}
               tintColor={THEME_COLOR}
-              onRefresh={() => this.getTrendingList()}
+              onRefresh={() => this.loadData()}
             />
           }
           ListFooterComponent={() => this.getIndicator()}
@@ -203,7 +218,7 @@ class TrendingTab extends Component {
             if(this.canLoadMore) {
               setTimeout(() => {
                   if (this.canLoadMore) {
-                      this.getTrendingList(true)
+                      this.loadData(true)
                       this.canLoadMore = false;
                   }
               }, 100);
@@ -257,7 +272,8 @@ const mapDispatchToProps =  dispatch => ({
   },
   onGetTrendingListMore(labelName, pageIndex, pageSize, items, callback) {
     dispatch(actions.TrendingLoadMoreAction(labelName, pageIndex, pageSize, items, favoriteUtil, callback))
-  }
+  },
+  onFlushTrendingFavorite(labelName, pageIndex, pageSize, items, favoriteUtil) {dispatch(actions.onFlushTrendingFavorite(labelName, pageIndex, pageSize, items, favoriteUtil))},
 })
 let TrendingTabPage =  connect(mapStateToProps, mapDispatchToProps)(TrendingTab)
 

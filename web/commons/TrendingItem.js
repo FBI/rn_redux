@@ -7,6 +7,7 @@ export default class TrendingItem extends BaseItem {
     render() {
         const { projectModel } = this.props
         const { item } = projectModel
+        if(!item) return null
         const { fullName, description, meta, contributors } = item
         let descriptionHTML = '<p>' + description + '</p>';
         return (

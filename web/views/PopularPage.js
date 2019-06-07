@@ -18,6 +18,7 @@ import NavigationBar from '../commons/NavigationBar'
 import NavigationUtils from '../navigators/NavigationUtils'
 import FavoriteUtil from '../utils/favoriteUtil'
 import favoriteCheckUtil from '../utils/favoriteCheckUtil'
+import EventBus from 'react-native-event-bus'
 const URL = 'https:/api.github.com/search/repositories?q='
 const QUERY_STR ='&sort=stars'
 const THEME_COLOR = 'hotpink'
@@ -80,21 +81,34 @@ export default class PopularPage extends Component{
 class PopularTab extends Component {
   constructor(props) {
     super(props) 
+    this.isFavoriteChange = false
   }
   componentDidMount() {
     this.loadData()
+    EventBus.getInstance().addListener('favorite_change_popular', this.favoriteListener = () => {
+      this.isFavoriteChange = true
+    })
+    EventBus.getInstance().addListener('bottom_tab_change', this.selectListener = params => {
+      params.to === 0 && this.isFavoriteChange && this.loadData(null, true)
+    })
   }
-  loadData(loadMore) {
-    this.getPopularList(loadMore)
+  componentWillUnmount() {
+    EventBus.getInstance().removeListener(this.favoriteListener)
+    EventBus.getInstance().removeListener(this.selectListener)
   }
-  getPopularList(loadMore) {
-    const { onGetPopularList, onGetPopularListMore, labelName } = this.props
+  loadData(loadMore, refreshFavorite) {
+    this.getPopularList(loadMore,refreshFavorite)
+  }
+  getPopularList(loadMore, refreshFavorite) {
+    const { onGetPopularList, onGetPopularListMore, onFlushPopularFavorite, labelName } = this.props
     let store = this.handleStore()
     let url = this.generateFetchUrl(labelName)
     if(loadMore) {
       onGetPopularListMore(labelName, ++store.pageIndex, pageSize, store.items, favoriteUtil, callback => {
         this.refs.toast.show('没有更多了啊')
       })
+    }else if(refreshFavorite) {
+      onFlushPopularFavorite(labelName, store.pageIndex, pageSize, store.items, favoriteUtil);
     }else {
       onGetPopularList(url, labelName, pageSize, favoriteUtil)
     }
@@ -212,7 +226,8 @@ const mapDispatchToProps =  dispatch => ({
   },
   onGetPopularListMore(labelName, pageIndex, pageSize, items,favoriteUtil, callback) {
     dispatch(actions.PopularLoadMoreAction(labelName, pageIndex, pageSize, items, favoriteUtil, callback))
-  }
+  },
+  onFlushPopularFavorite: (labelName, pageIndex, pageSize, items, favoriteUtil) => dispatch(actions.onFlushPopularFavorite(labelName, pageIndex, pageSize, items, favoriteUtil)),
 })
 let PopularTabPage =  connect(mapStateToProps, mapDispatchToProps)(PopularTab)
 

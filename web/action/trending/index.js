@@ -19,7 +19,7 @@ export function getTrendingListActon( url, labelName, pageSize, favoriteUtil ) {
     }
 }
 
-export function TrendingLoadMoreAction( labelName, pageIndex, pageSize, dataArray = [], callback ) {
+export function TrendingLoadMoreAction( labelName, pageIndex, pageSize, dataArray = [], favoriteUtil,callback ) {
     return dispatch => {
         setTimeout(() => {// 模拟网络请求
             if((pageIndex - 1) * pageSize >= dataArray.length) {// 没有更多数据
@@ -34,11 +34,13 @@ export function TrendingLoadMoreAction( labelName, pageIndex, pageSize, dataArra
             }else {
                 //计算本次可加载的最大数据量
                 let max = pageSize * pageIndex > dataArray.length ? dataArray.length : pageSize * pageIndex;
-                dispatch({
-                    type: Types.TRENDING_LOAD_MORE_SUCCESS,
-                    labelName,
-                    pageIndex,
-                    projectModels: dataArray.slice(0, max)
+                _projectModels(dataArray.slice(0, max),favoriteUtil,projectModels=>{
+                    dispatch({
+                        type: Types.TRENDING_LOAD_MORE_SUCCESS,
+                        labelName,
+                        pageIndex,
+                        projectModels
+                    })
                 })
             }
             
@@ -62,12 +64,18 @@ function handleRefreshData( actionType, dispatch, labelName, data, pageSize, fav
             labelName
         })
     });
-    // dispatch({
-    //     type: actionType,
-    //     items: fixItems,
-    //     projectModels: pageSize > fixItems.length ? fixItems : fixItems.slice(0, pageSize), // 第一次加载数据
-    //     pageIndex: 1,
-    //     labelName
-        
-    // })
+}
+export function onFlushTrendingFavorite(labelName, pageIndex, pageSize, dataArray = [], favoriteUtil) {
+    return dispatch=>{
+        //本次和载入的最大数量
+        let max = pageSize * pageIndex > dataArray.length ? dataArray.length : pageSize * pageIndex;
+        _projectModels(dataArray.slice(0, max),favoriteUtil,data=>{
+            dispatch({
+                type: Types.FLUSH_TRENDING_FAVORITE,
+                labelName,
+                pageIndex,
+                projectModels: data,
+            })
+        })
+    }
 }

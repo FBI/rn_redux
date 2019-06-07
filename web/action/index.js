@@ -1,6 +1,6 @@
 import onThemeChange from './theme'
-import { getPopularListActon, PopularLoadMoreAction } from './popular'
-import { getTrendingListActon, TrendingLoadMoreAction } from './trending'
+import { getPopularListActon, PopularLoadMoreAction,onFlushPopularFavorite } from './popular'
+import { getTrendingListActon, TrendingLoadMoreAction, onFlushTrendingFavorite } from './trending'
 import { getFavoriteDataAction } from './favorite'
 
 export default {
@@ -9,5 +9,7 @@ export default {
     PopularLoadMoreAction,
     getTrendingListActon,
     TrendingLoadMoreAction,
-    getFavoriteDataAction
+    getFavoriteDataAction,
+    onFlushPopularFavorite,
+    onFlushTrendingFavorite
 }

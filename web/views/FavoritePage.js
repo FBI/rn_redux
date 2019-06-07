@@ -18,6 +18,7 @@ import NavigationBar from '../commons/NavigationBar'
 import NavigationUtils from '../navigators/NavigationUtils'
 import FavoriteUtil from '../utils/favoriteUtil'
 import favoriteCheckUtil from '../utils/favoriteCheckUtil'
+import EventBus from 'react-native-event-bus'
 const THEME_COLOR = 'hotpink'
 
 export default class FavoritePage extends Component{
@@ -83,6 +84,12 @@ class FavoriteTab extends Component {
   }
   componentDidMount() {
     this.loadData(true)
+    EventBus.getInstance().addListener('bottom_tab_change', this.listener = params => {
+      params.to === 2 && this.loadData(false)
+    })
+  }
+  componentWillUnmount() {
+    EventBus.getInstance().removeListener(this.listener)
   }
   loadData(isShowLoading) {
     const { getFavoriteData } = this.props
@@ -102,6 +109,11 @@ class FavoriteTab extends Component {
   }
   onFavorite(item, isFavorite) {
     favoriteCheckUtil.onFavorite(this.favoriteUtil, item.item, isFavorite, this.labelName)
+    if(this.labelName === 'popular') {
+      EventBus.getInstance().fireEvent('favorite_change_popular')
+    }else {
+      EventBus.getInstance().fireEvent('favorite_change_trending')
+    }
   }
   createItem(data) {
     const { item } = data
