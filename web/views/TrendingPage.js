@@ -16,13 +16,16 @@ import TrendingItem from '../commons/TrendingItem'
 import NavigationBar from '../commons/NavigationBar'
 import NavigationUtils from '../navigators/NavigationUtils'
 import TrendingDialog, { TimeSpans } from '../commons/TrendingDialog'
+import FavoriteUtil from '../utils/favoriteUtil'
+import favoriteCheckUtil from '../utils/favoriteCheckUtil'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { connect } from 'react-redux'
-import DataSource from '../asyncStorage/dataSource'
+import DataSource, { FLAG_STORAGE } from '../asyncStorage/dataSource'
 import actions from '../action'
 const URL = 'https://github.com/trending/';
 const THEME_COLOR = 'hotpink'
 const pageSize = 10
+const favoriteUtil = new FavoriteUtil(FLAG_STORAGE.flag_trending)
 
 export default class TrendingPage extends Component{
   constructor(props) {
@@ -136,11 +139,11 @@ class TrendingTab extends Component {
     let store = this.handleStore()
     let url = this.generateFetchUrl(labelName)
     if(loadMore) {
-      onGetTrendingListMore(labelName, ++store.pageIndex, pageSize, store.items, callback => {
+      onGetTrendingListMore(labelName, ++store.pageIndex, pageSize, store.items, favoriteUtil, callback => {
         this.refs.toast.show('没有更多了啊')
       })
     }else {
-      onGetTrendingList(url, labelName, pageSize)
+      onGetTrendingList(url, labelName, pageSize, favoriteUtil)
     }
   }
   handleStore() {
@@ -160,9 +163,11 @@ class TrendingTab extends Component {
     return `${URL}${labelName}?${this.timeSpan.searchText}`
   }
   createItem(data) {
+    const { item } = data
     return <TrendingItem
-              projectModel={data.item}
-              onSelect={() => NavigationUtils.toTargetPage('DetailPage', data.item)}
+              projectModel={item}
+              onSelect={callback => NavigationUtils.toTargetPage('DetailPage', {item, flag: FLAG_STORAGE.flag_trending,callback})}
+              onFavorite={(item, isFavorite) => favoriteCheckUtil.onFavorite(favoriteUtil, item.item, isFavorite, FLAG_STORAGE.flag_trending)}
            />
   }
   getIndicator() {
@@ -181,7 +186,7 @@ class TrendingTab extends Component {
         <FlatList
           data={store.projectModels}
           renderItem={data => this.createItem(data)}
-          keyExtractor={data => '' + data.fullName}
+          keyExtractor={data => '' + data.fullName+Math.random()}
           refreshControl={
             <RefreshControl
               title={'玩命加载中...'}
@@ -247,11 +252,11 @@ const mapStateToProps = state => ({
   trending: state.trending
 })
 const mapDispatchToProps =  dispatch => ({
-  onGetTrendingList(url, labelName, pageSize) {
-    dispatch(actions.getTrendingListActon(url, labelName, pageSize))
+  onGetTrendingList(url, labelName, pageSize, favoriteUtil) {
+    dispatch(actions.getTrendingListActon(url, labelName, pageSize, favoriteUtil))
   },
   onGetTrendingListMore(labelName, pageIndex, pageSize, items, callback) {
-    dispatch(actions.TrendingLoadMoreAction(labelName, pageIndex, pageSize, items, callback))
+    dispatch(actions.TrendingLoadMoreAction(labelName, pageIndex, pageSize, items, favoriteUtil, callback))
   }
 })
 let TrendingTabPage =  connect(mapStateToProps, mapDispatchToProps)(TrendingTab)

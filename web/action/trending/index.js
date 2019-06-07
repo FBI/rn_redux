@@ -1,13 +1,14 @@
 import Types from '../types'
 import DataSource from '../../asyncStorage/dataSource'
+import { _projectModels } from '../actionUtil'
 
 //  异步action获取最热模块列表数据
-export function getTrendingListActon( url, labelName, pageSize ) {
+export function getTrendingListActon( url, labelName, pageSize, favoriteUtil ) {
     return dispatch => {
         dispatch({ type: Types.TRENDING_REFRESH, labelName })
         let dataSource = new DataSource();
         dataSource.fetchData( url, 'trending' ).then( res => {
-            handleRefreshData(Types.TRENDING_REFRESH_SUCCESS, dispatch, labelName, res, pageSize)
+            handleRefreshData(Types.TRENDING_REFRESH_SUCCESS, dispatch, labelName, res, pageSize, favoriteUtil)
         }).catch( error => {
             dispatch({
                 type: Types.TRENDING_REFRESH_FAIL,
@@ -46,17 +47,27 @@ export function TrendingLoadMoreAction( labelName, pageIndex, pageSize, dataArra
 }
 
 // 处理下拉刷新数据
-function handleRefreshData( actionType, dispatch, labelName, data, pageSize ) {
+function handleRefreshData( actionType, dispatch, labelName, data, pageSize, favoriteUtil ) {
     let fixItems = []
     if(data && data.data && data.data) {
         fixItems = data.data
     }
-    dispatch({
-        type: actionType,
-        items: fixItems,
-        projectModels: pageSize > fixItems.length ? fixItems : fixItems.slice(0, pageSize), // 第一次加载数据
-        pageIndex: 1,
-        labelName
+    let showItems = pageSize > fixItems.length ? fixItems : fixItems.slice(0, pageSize);
+    _projectModels(showItems,favoriteUtil,projectModels=>{
+        dispatch({
+            type: actionType,
+            items: fixItems,
+            projectModels: projectModels,
+            pageIndex: 1,
+            labelName
+        })
+    });
+    // dispatch({
+    //     type: actionType,
+    //     items: fixItems,
+    //     projectModels: pageSize > fixItems.length ? fixItems : fixItems.slice(0, pageSize), // 第一次加载数据
+    //     pageIndex: 1,
+    //     labelName
         
-    })
+    // })
 }

@@ -10,21 +10,25 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
 import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
 import { connect } from 'react-redux'
-import DataSource from '../asyncStorage/dataSource'
+import DataSource, { FLAG_STORAGE } from '../asyncStorage/dataSource'
 import actions from '../action'
 import PopularItem from '../commons/PopularItem'
 import Toast from 'react-native-easy-toast'
 import NavigationBar from '../commons/NavigationBar'
+import NavigationUtils from '../navigators/NavigationUtils'
+import FavoriteUtil from '../utils/favoriteUtil'
+import favoriteCheckUtil from '../utils/favoriteCheckUtil'
 const URL = 'https:/api.github.com/search/repositories?q='
 const QUERY_STR ='&sort=stars'
 const THEME_COLOR = 'hotpink'
 const pageSize = 10
+const favoriteUtil = new FavoriteUtil(FLAG_STORAGE.flag_popular)
 
 export default class PopularPage extends Component{
   constructor(props) {
     super(props)
     this.dataSource = new DataSource
-    this.tabs = ['Flutter', 'React Natie', 'Weex', 'Ionic', 'React', 'Vue', 'Angular']
+    this.tabs = ['Flutter', 'React Native', 'Weex', 'Ionic', 'React', 'Vue', 'Angular']
   }
   createTopTabs() {
     let tab = {}
@@ -77,16 +81,22 @@ class PopularTab extends Component {
   constructor(props) {
     super(props) 
   }
+  componentDidMount() {
+    this.loadData()
+  }
+  loadData(loadMore) {
+    this.getPopularList(loadMore)
+  }
   getPopularList(loadMore) {
     const { onGetPopularList, onGetPopularListMore, labelName } = this.props
     let store = this.handleStore()
     let url = this.generateFetchUrl(labelName)
     if(loadMore) {
-      onGetPopularListMore(labelName, ++store.pageIndex, pageSize, store.items, callback => {
+      onGetPopularListMore(labelName, ++store.pageIndex, pageSize, store.items, favoriteUtil, callback => {
         this.refs.toast.show('没有更多了啊')
       })
     }else {
-      onGetPopularList(url, labelName, pageSize)
+      onGetPopularList(url, labelName, pageSize, favoriteUtil)
     }
   }
   handleStore() {
@@ -106,10 +116,13 @@ class PopularTab extends Component {
     return URL + labelName + QUERY_STR
   }
   createItem(data) {
-    const item = data.item
+    const { item } = data
     return <PopularItem
-              item={item}
-              onPress={() => {}}
+              projectModel={item}
+              onSelect={callback =>  NavigationUtils.toTargetPage(
+                'DetailPage', {item:item,flag: FLAG_STORAGE.flag_popular,callback})
+              }
+              onFavorite={(item, isFavorite) => favoriteCheckUtil.onFavorite(favoriteUtil, item.item, isFavorite, FLAG_STORAGE.flag_popular)}
            />
   }
   getIndicator() {
@@ -128,7 +141,7 @@ class PopularTab extends Component {
         <FlatList
           data={store.projectModels}
           renderItem={data => this.createItem(data)}
-          keyExtractor={data => '' + data.id}
+          keyExtractor={data => '' + data.item.id}
           refreshControl={
             <RefreshControl
               title={'玩命加载中...'}
@@ -136,7 +149,7 @@ class PopularTab extends Component {
               refreshing={store.isLoading}
               color={[THEME_COLOR]}
               tintColor={THEME_COLOR}
-              onRefresh={() => this.getPopularList()}
+              onRefresh={() => this.loadData()}
             />
           }
           ListFooterComponent={() => this.getIndicator()}
@@ -145,7 +158,7 @@ class PopularTab extends Component {
             if(this.canLoadMore) {
               setTimeout(() => {
                   if (this.canLoadMore) {
-                      this.getPopularList(true)
+                      this.loadData(true)
                       this.canLoadMore = false;
                   }
               }, 100);
@@ -194,11 +207,11 @@ const mapStateToProps = state => ({
   popular: state.popular
 })
 const mapDispatchToProps =  dispatch => ({
-  onGetPopularList(url, labelName, pageSize) {
-    dispatch(actions.getPopularListActon(url, labelName, pageSize))
+  onGetPopularList(url, labelName, pageSize, favoriteUtil) {
+    dispatch(actions.getPopularListActon(url, labelName, pageSize, favoriteUtil))
   },
-  onGetPopularListMore(labelName, pageIndex, pageSize, items, callback) {
-    dispatch(actions.PopularLoadMoreAction(labelName, pageIndex, pageSize, items, callback))
+  onGetPopularListMore(labelName, pageIndex, pageSize, items,favoriteUtil, callback) {
+    dispatch(actions.PopularLoadMoreAction(labelName, pageIndex, pageSize, items, favoriteUtil, callback))
   }
 })
 let PopularTabPage =  connect(mapStateToProps, mapDispatchToProps)(PopularTab)

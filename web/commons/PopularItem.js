@@ -1,26 +1,16 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import BaseItem from './BaseItem'
 
-export default class PopularItem extends React.Component {
+export default class PopularItem extends BaseItem {
     render() {
-        const { item, onSelect } = this.props
+        const { projectModel } = this.props
+        const { item } = projectModel
         if(!item || !item.owner) return null
         const { full_name, description, stargazers_count, owner } = item
-        let favoriteButton = <TouchableOpacity
-                                style={{padding: 6}}
-                                onPress={() => {}}
-                                underLayColor={'transparent'}
-                             >
-                                <Ionicons
-                                    name={'ios-thumbs-up'}
-                                    size={26}
-                                    style={{color: 'hotpink'}}
-                                />
-                             </TouchableOpacity>
         return (
             <TouchableOpacity
-                onPress={onSelect}
+                onPress={() => this.onItemClick()}
             >
                 <View style={styles.container}>
                     <Text style={styles.fullName}>{full_name}</Text>
@@ -37,7 +27,7 @@ export default class PopularItem extends React.Component {
                             <Text>Stars:</Text>
                             <Text>{stargazers_count}</Text>
                         </View>
-                        { favoriteButton }
+                        { this._favoriteIcon() }
                     </View>
                 </View>
             </TouchableOpacity>

@@ -15,4 +15,16 @@ export default class viewUtil {
                     />
                </TouchableOpacity>
     }
+    static getShareButton(callBack) {
+        return <TouchableOpacity
+                    underlayColor={'transparent'}
+                    onPress={callBack}
+               >
+                    <Ionicons
+                        name={'md-share'}
+                        size={20}
+                        style={{opacity: 0.9, marginRight: 10, color: 'white'}}
+                    />
+               </TouchableOpacity>
+    }
 }

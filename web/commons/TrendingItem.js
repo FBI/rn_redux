@@ -1,16 +1,17 @@
 import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import HTMLView from 'react-native-htmlview';
-//import console = require('console');
+import BaseItem from './BaseItem'
 
-export default class TrendingItem extends React.Component {
+export default class TrendingItem extends BaseItem {
     render() {
-        const { projectModel, onSelect } = this.props
-        const { fullName, description, meta, contributors } = projectModel
+        const { projectModel } = this.props
+        const { item } = projectModel
+        const { fullName, description, meta, contributors } = item
         let descriptionHTML = '<p>' + description + '</p>';
         return (
             <TouchableOpacity
-                onPress={() => onSelect()}
+                onPress={() => this.onItemClick()}
             >
                 <View style={styles['item-container']}>
                     <Text style={styles.autorName}>{fullName}</Text>
@@ -40,6 +41,7 @@ export default class TrendingItem extends React.Component {
                             }
 
                         </View>
+                        {this._favoriteIcon()}
                     </View>
                 </View>
             </TouchableOpacity>
