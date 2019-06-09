@@ -7,8 +7,8 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
-import NavigationUtils from '../navigators/NavigationUtils'
+import { StyleSheet, Text, View, Animated, Easing, ImageBackground } from 'react-native';
+import navigationUtil from '../navigators/NavigationUtils'
 export default class WelcomePage extends Component{
   constructor(props) {
     super(props)
@@ -16,19 +16,21 @@ export default class WelcomePage extends Component{
   }
   componentDidMount() {
     this.timer = setTimeout(() => {
-      NavigationUtils.resetToHomePage(this.props)
-    },2000)
+      navigationUtil.resetToHomePage(this.props)
+    },3000)
   }
   componentWillUnmount() {
     this.timer && clearTimeout(this.timer)
   }
   render() {
     return (
-      <View style={styles.container}>
+      <ImageBackground style={{flex:1}} source={require('../images/loading.gif')}>
+      <View >
         <FadeInView>
           <Text style={styles.desc}>Welcome!</Text>
         </FadeInView>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -44,7 +46,7 @@ class FadeInView extends Component {
     Animated.timing( this.state.fadeAnimation, {
       toValue: 1,
       easing: Easing.back(),
-      duration: 1000
+      duration: 800
     }).start()
   }
   render() {
@@ -55,6 +57,7 @@ class FadeInView extends Component {
            >
             { this.props.children }
            </Animated.View>
+           
   }
 }
 const styles = StyleSheet.create({
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    //backgroundColor: '#F5FCFF',
   },
   desc: {
     color: 'brown',

@@ -23,7 +23,6 @@ export default class DetailPage extends Component{
     const { fullName, full_name, html_url } = item.item
     let url = html_url || (TRENDING_URL + fullName)
     let title = fullName || full_name
-    console.log('有没有flag啊:' + flag)
     this.favoriteUtil = new favoriteUtils(flag)
     this.state = {
       canGoBack: false,

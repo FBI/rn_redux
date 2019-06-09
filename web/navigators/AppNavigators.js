@@ -2,6 +2,9 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation'
 import WelcomePage from '../views/WelcomePage'
 import HomePage from '../views/HomePage'
 import DetailPage from '../views/DetailPage'
+import AboutPage from '../views/About/AboutPage'
+import AboutMePage from '../views/About/AboutMePage'
+import WebViewPage from '../views/WebViewPage'
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from "react-navigation-redux-helpers";
 export const rootCom = 'Init' // 定义根路由
 
@@ -24,6 +27,24 @@ const MainNavigator = createStackNavigator(
                 // headerStyle: {
                 //     backgroundColor: 'cyan'
                 // }
+                header: null
+            }
+        },
+        AboutPage: {
+            screen: AboutPage,
+            navigationOptions: {
+                header: null,
+            }
+        },
+        AboutMePage: {
+            screen: AboutMePage,
+            navigationOptions: {
+                header: null,
+            }
+        },
+        WebViewPage: {
+            screen: WebViewPage,
+            navigationOptions: {
                 header: null
             }
         },

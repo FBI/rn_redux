@@ -1,0 +1,75 @@
+{
+    "aboutMe": {
+      "Tutorial": {
+        "name": "教程",
+        "icon": "ios-bookmarks",
+        "items": [
+          {
+            "title": "React Native官网文档",
+            "url": "https://facebook.github.io/react-native/docs/0.59/getting-started"
+          },
+          {
+            "title": "awesome-react-native",
+            "url": "https://github.com/jondot/awesome-react-native#ui"
+          }
+        ]
+      },
+      "Blog": {
+        "name": "技术博客",
+        "icon": "ios-laptop",
+        "items": [
+          {
+            "title": "GitHub",
+            "url": "https://github.com/FBI?tab=repositories"
+          }
+        ]
+      },
+      "Contact": {
+        "name": "联系方式",
+        "icon": "ios-contacts",
+        "items": {
+          "QQ": {
+            "title": "QQ",
+            "account": "1586866509"
+          },
+          "Email": {
+            "title": "Email",
+            "account": "18311433156@163.com"
+          }
+        }
+      },
+      "QQ": {
+        "name": "技术交流群",
+        "icon": "ios-chatbubbles",
+        "items": [
+          {
+            "title": "移动开发者技术分享群",
+            "account": "895658993"
+          },
+          {
+            "title": "React Native学习交流群",
+            "account": "895658993"
+          }
+        ]
+      }
+    },
+    "info": {
+      "html_url": "https://github.com/crazycodeboy/",
+      "url": "https://api.github.com/repos/crazycodeboy/",
+      "currentRepoUrl": "https://api.github.com/repos/crazycodeboy/GitHubPopular"
+    },
+    "author": {
+      "name": "WangHuang",
+      "description": "佛系前端,热爱编程,crazyCodingBoy",
+      "avatar": "http://avatar.csdn.net/1/1/E/1_fengyuzhengfan.jpg",
+      "backgroundImg": "https://hbimg.huabanimg.com/191f579936b43773ca9161622e7b9ecfc0fbbaf77bd8-HpbkVv_fw658",
+      "url": "http://www.devio.org/"
+    },
+    "app": {
+      "name": "GitHub Client",
+      "description": "这是一个用来查看GitHub最受欢迎与最热项目的App,它基于React Native支持Android和iOS双平台。",
+      "avatar": "http://www.devio.org/io/GitHubPopular/img/ic_app.png",
+      "backgroundImg": "https://hbimg.huabanimg.com/c9162c788ecc2c4e8d87653bff46b73a6d2e108f6039f-VOU85k_fw658"
+    }
+  }
+  
