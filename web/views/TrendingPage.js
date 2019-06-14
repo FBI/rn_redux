@@ -28,30 +28,34 @@ const THEME_COLOR = 'hotpink'
 const pageSize = 10
 const favoriteUtil = new FavoriteUtil(FLAG_STORAGE.flag_trending)
 
-export default class TrendingPage extends Component{
+class TrendingPage extends Component{
   constructor(props) {
     super(props)
     this.state = {
         timeSpan: TimeSpans[0],
     };
     this.dataSource = new DataSource
-    this.tabs = ['JavaScript', 'HTML', 'CSS', 'C', 'C++', 'C#']
+  }
+  componentDidMount() {
+    const { onLoadLanguage } = this.props
+    onLoadLanguage()
   }
   createTopTabs() {
     let tab = {}
-    this.tabs.forEach((item,idx) => {
+    const { languages } = this.props
+    languages.forEach((item,idx) => {
       tab[`tab${idx}`] = {
-        screen: props => <TrendingTabPage {...props} labelName={item} timeSpan={this.state.timeSpan} />,
+        screen: props => <TrendingTabPage {...props} labelName={item.name} timeSpan={this.state.timeSpan} />,
         navigationOptions: {
-          tabBarLabel: item
+          tabBarLabel: item.name
         }
       }
     })
     return tab
   }
   createTopTabNavigator() {
-    if(this.tabNav) return this.tabNav
     let tn =  createMaterialTopTabNavigator(this.createTopTabs(), {
+      lazy: true,
       tabBarOptions: {
         inactiveTintColor: 'white',
         tabStyle: styles.tabStyle,
@@ -64,7 +68,7 @@ export default class TrendingPage extends Component{
         indicatorStyle: styles.indicatorStyle
       }
     })
-    return this.tabNav = createAppContainer(tn)
+    return createAppContainer(tn)
   }
   renderTitleView() {
     return <View>
@@ -111,14 +115,24 @@ export default class TrendingPage extends Component{
             statusBar={statusBar}
             style={{backgroundColor: 'turquoise'}}
         />;
-    let TopTab = this.createTopTabNavigator()
+    let TopTab = this.props.languages.length ? this.createTopTabNavigator() : null
     return <View style={styles.container}>
             {navigationBar}
-            <TopTab />
+            {TopTab && <TopTab />}
             {this.renderTrendingDialog()}
            </View>
   }
 }
+const mapTrendingPageStateToProps = state => ({
+  languages: state.labelLanguage.languages
+})
+const mapTrendingPagDispatchToProps =  dispatch => ({
+  onLoadLanguage() {
+    dispatch(actions.onLoadLanguageLabel('language'))
+  },
+})
+export default connect(mapTrendingPageStateToProps, mapTrendingPagDispatchToProps)(TrendingPage)
+
 
 class TrendingTab extends Component {
   constructor(props) {

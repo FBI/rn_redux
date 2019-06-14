@@ -31,6 +31,13 @@ export default class MyPage extends Component{
       case moreMenuUtil.About_Author:
             routeName = 'AboutMePage';
             break;
+      case moreMenuUtil.Custom_Key:
+      case moreMenuUtil.Custom_Language:
+      case moreMenuUtil.Remove_Key:
+            routeName = 'CustomPage'
+            params.isRemoveLabel = menu === moreMenuUtil.Remove_Key;
+            params.flag = menu !== moreMenuUtil.Custom_Language ? 'label' : 'language';
+            break;
       case moreMenuUtil.Feedback:
             const url = 'mailto://18311433156@163.com';
             Linking.canOpenURL(url)

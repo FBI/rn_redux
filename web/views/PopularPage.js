@@ -25,27 +25,31 @@ const THEME_COLOR = 'hotpink'
 const pageSize = 10
 const favoriteUtil = new FavoriteUtil(FLAG_STORAGE.flag_popular)
 
-export default class PopularPage extends Component{
+class PopularPage extends Component{
   constructor(props) {
     super(props)
     this.dataSource = new DataSource
-    this.tabs = ['Flutter', 'React Native', 'Weex', 'Ionic', 'React', 'Vue', 'Angular']
+  }
+  componentDidMount() {
+    const { onLoadLabel } = this.props
+    onLoadLabel()
   }
   createTopTabs() {
     let tab = {}
-    this.tabs.forEach((item,idx) => {
+    const { labels } = this.props
+    labels.forEach((item,idx) => {
       tab[`tab${idx}`] = {
-        screen: props => <PopularTabPage {...props} labelName={item} />,
+        screen: props => <PopularTabPage {...props} labelName={item.name} />,
         navigationOptions: {
-          tabBarLabel: item
+          tabBarLabel: item.name
         }
       }
     })
     return tab
   }
   createTopTabNavigator() {
-    if(this.tabNav) return this.tabNav
     let tn =  createMaterialTopTabNavigator(this.createTopTabs(), {
+      lazy: true,
       tabBarOptions: {
         inactiveTintColor: 'white',
         tabStyle: styles.tabStyle,
@@ -58,7 +62,7 @@ export default class PopularPage extends Component{
         indicatorStyle: styles.indicatorStyle
       }
     })
-    return this.tabNav = createAppContainer(tn)
+    return createAppContainer(tn)
   }
   render() {
     let statusBar = {
@@ -70,13 +74,25 @@ export default class PopularPage extends Component{
         statusBar={statusBar}
         style={{backgroundColor: 'turquoise'}}
     />;
-    let TopTab = this.createTopTabNavigator()
+    let TopTab = this.props.labels.length ? this.createTopTabNavigator() : null
     return <View style={styles.container}>
             {navigationBar}
-            <TopTab />
+            { TopTab && <TopTab />}
            </View>
   }
 }
+const mapPopularPageStateToProps = state => ({
+  labels: state.labelLanguage.labels
+})
+const mapPopularPagDispatchToProps =  dispatch => ({
+  onLoadLabel() {
+    dispatch(actions.onLoadLanguageLabel('label'))
+  },
+})
+export default connect(mapPopularPageStateToProps, mapPopularPagDispatchToProps)(PopularPage)
+
+
+
 
 class PopularTab extends Component {
   constructor(props) {
@@ -191,6 +207,21 @@ class PopularTab extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  popular: state.popular
+})
+const mapDispatchToProps =  dispatch => ({
+  onGetPopularList(url, labelName, pageSize, favoriteUtil) {
+    dispatch(actions.getPopularListActon(url, labelName, pageSize, favoriteUtil))
+  },
+  onGetPopularListMore(labelName, pageIndex, pageSize, items,favoriteUtil, callback) {
+    dispatch(actions.PopularLoadMoreAction(labelName, pageIndex, pageSize, items, favoriteUtil, callback))
+  },
+  onFlushPopularFavorite: (labelName, pageIndex, pageSize, items, favoriteUtil) => dispatch(actions.onFlushPopularFavorite(labelName, pageIndex, pageSize, items, favoriteUtil)),
+})
+let PopularTabPage =  connect(mapStateToProps, mapDispatchToProps)(PopularTab)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -216,19 +247,5 @@ const styles = StyleSheet.create({
     margin: 10
   }
 });
-
-const mapStateToProps = state => ({
-  popular: state.popular
-})
-const mapDispatchToProps =  dispatch => ({
-  onGetPopularList(url, labelName, pageSize, favoriteUtil) {
-    dispatch(actions.getPopularListActon(url, labelName, pageSize, favoriteUtil))
-  },
-  onGetPopularListMore(labelName, pageIndex, pageSize, items,favoriteUtil, callback) {
-    dispatch(actions.PopularLoadMoreAction(labelName, pageIndex, pageSize, items, favoriteUtil, callback))
-  },
-  onFlushPopularFavorite: (labelName, pageIndex, pageSize, items, favoriteUtil) => dispatch(actions.onFlushPopularFavorite(labelName, pageIndex, pageSize, items, favoriteUtil)),
-})
-let PopularTabPage =  connect(mapStateToProps, mapDispatchToProps)(PopularTab)
 
 
