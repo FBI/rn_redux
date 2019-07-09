@@ -107,20 +107,15 @@ class DynamicTabNavigator extends Component {
 class TabBarComponent extends Component {
     constructor(props) {
         super(props) 
-        // this.theme = {
-        //     tintColor: props.activeTintColor,
-        //     updateTime: new Date().getTime()
-        // }
+        this.theme = {
+            tintColor: props.activeTintColor,
+            updateTime: new Date().getTime()
+        }
     }
     render() {
-        // const { routes, index } = this.props.navigation.state
-        // if(routes[index].params) {
-        //     const { theme } = routes[index].params
-        //     if(theme && theme.updateTime > this.theme.updateTime) this.theme = theme
-        // }
         return <BottomTabBar 
                     {...this.props}
-                    activeTintColor={this.props.theme || this.props.activeTintColor}
+                    activeTintColor={this.props.theme.themeColor}
                />
     }
 }

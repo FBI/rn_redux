@@ -17,7 +17,7 @@ export default class WelcomePage extends Component{
   componentDidMount() {
     this.timer = setTimeout(() => {
       navigationUtil.resetToHomePage(this.props)
-    },3000)
+    },1000)
   }
   componentWillUnmount() {
     this.timer && clearTimeout(this.timer)

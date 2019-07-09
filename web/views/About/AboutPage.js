@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Linking } from 'react-native'
+import { connect } from 'react-redux'
 import CommonContent from './components/CommonContent'
 import config from '../../config/config'
 import moreMenuUtil from '../../utils/moreMenuUtil';
@@ -7,7 +8,7 @@ import navigationUtil from '../../navigators/NavigationUtils'
 import viewsUtil from '../../utils/viewsUtil'
 import globalStyle from '../../styles/globalStyle'
 
-export default class AboutPage extends Component {
+class AboutPage extends Component {
     constructor(props) {
         super(props)
         this.params = this.props.navigation.state.params
@@ -21,12 +22,14 @@ export default class AboutPage extends Component {
         }
     }
     onClick(menu) {
+        const { theme } = this.props
         let routeName = ''
         let params = {}
         switch(menu) {
             case moreMenuUtil.Tutorial: 
                     routeName = 'WebViewPage';
                     params.title = '教程';
+                    params.theme = theme
                     params.url = 'https://github.com/Solido/awesome-flutter';
                     break;
             case moreMenuUtil.About_Author:
@@ -49,7 +52,8 @@ export default class AboutPage extends Component {
         if(routeName) navigationUtil.toTargetPage(routeName, params);
     }
     renderItem(menu) {
-        return viewsUtil.getMenuItem(() => this.onClick(menu), menu, 'hotpink');
+        const { theme } = this.props
+        return viewsUtil.getMenuItem(() => this.onClick(menu), menu, theme.themeColor);
     }
     render() {
         const content = <View>
@@ -62,3 +66,7 @@ export default class AboutPage extends Component {
         return this.commonContent.render(content, this.state.data.app);
     }
 }
+const mapStateToProps = state => ({
+    theme: state.theme.theme
+})
+export default connect(mapStateToProps, null)(AboutPage)

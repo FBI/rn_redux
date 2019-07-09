@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Clipboard } from 'react-native'
+import { connect } from 'react-redux'
 import Toast from 'react-native-easy-toast'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import CommonContent from './components/CommonContent'
@@ -8,7 +9,7 @@ import viewsUtil from '../../utils/viewsUtil'
 import navigationUtil from '../../navigators/NavigationUtils'
 import globalStyle from '../../styles/globalStyle'
 
-export default class AboutMePage extends Component {
+class AboutMePage extends Component {
     constructor(props) {
         super(props)
         this.params = this.props.navigation.state.params
@@ -49,11 +50,12 @@ export default class AboutMePage extends Component {
         }
     }
     renderItem(data, isShow, key) {
+        const { theme } = this.props
         return viewsUtil.getSettingItem(() => {
             this.setState({
                 [key]: !this.state[key]
             });
-        }, data.name, 'hotpink', Ionicons, data.icon, isShow ? 'ios-arrow-up' : 'ios-arrow-down')
+        }, data.name, theme.themeColor, Ionicons, data.icon, isShow ? 'ios-arrow-up' : 'ios-arrow-down')
     }
     /**
      * 显示列表数据
@@ -61,13 +63,14 @@ export default class AboutMePage extends Component {
      * @param isShowAccount
      */
     renderSecondItem(items, isShowAccount) {
+        const { theme } = this.props
         if (!items) return null;
         let views = [];
         for (let i in items) {
             let title = isShowAccount ? items[i].title + ':' + items[i].account : items[i].title;
             views.push(
                 <View key={i}>
-                    {viewsUtil.getSettingItem(() => this.onClick(items[i]), title, 'hotpink')}
+                    {viewsUtil.getSettingItem(() => this.onClick(items[i]), title, theme.themeColor)}
                     <View style={globalStyle.line}/>
                 </View>
             )
@@ -102,3 +105,8 @@ export default class AboutMePage extends Component {
                </View>
     }
 }
+
+const mapStateToProps = state => ({
+    theme: state.theme.theme
+})
+export default connect(mapStateToProps, null)(AboutMePage)

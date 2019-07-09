@@ -12,6 +12,8 @@ import NavigationUtils from '../navigators/NavigationUtils'
 import DynamicTabNavigator from '../navigators/DynamicTabNavigator'
 import { NavigationActions } from "react-navigation";
 import { connect } from 'react-redux'
+import actions from '../action'
+import CustomThemePage from './CustomThemePage'
 
 class HomePage extends Component{
   componentDidMount() {
@@ -27,12 +29,30 @@ class HomePage extends Component{
     dispatch(NavigationActions.back())
     return true
   }
+  renderCustomThemeView() {
+    const { customThemeViewVisible, onShowCustomThemeView } = this.props
+    return (<CustomThemePage
+              {...this.props}
+              visible={customThemeViewVisible}
+              onClose={() => onShowCustomThemeView(false)}
+           />)
+  }
   render() {
     NavigationUtils.navigation = this.props.navigation
-    return <View style={{flex: 1}}><DynamicTabNavigator /></View>
+    return <View style={{flex: 1}}>
+              <DynamicTabNavigator />
+              {this.renderCustomThemeView()}
+           </View>
   }
 }
 const mapStateToProps = state => ({
-  nav: state.nav
+  nav: state.nav,
+  customThemeViewVisible: state.theme.customThemeViewVisible,
+  theme: state.theme.theme
 })
-export default connect(mapStateToProps, null)(HomePage)
+const mapDispatchToProps = dispatch => ({
+  onShowCustomThemeView(isShow) {
+    dispatch(actions.onShowCustomThemeView(isShow))
+  }
+})
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

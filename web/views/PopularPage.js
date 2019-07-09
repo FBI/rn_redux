@@ -21,7 +21,6 @@ import favoriteCheckUtil from '../utils/favoriteCheckUtil'
 import EventBus from 'react-native-event-bus'
 const URL = 'https:/api.github.com/search/repositories?q='
 const QUERY_STR ='&sort=stars'
-const THEME_COLOR = 'hotpink'
 const pageSize = 10
 const favoriteUtil = new FavoriteUtil(FLAG_STORAGE.flag_popular)
 
@@ -38,16 +37,19 @@ class PopularPage extends Component{
     let tab = {}
     const { labels } = this.props
     labels.forEach((item,idx) => {
-      tab[`tab${idx}`] = {
-        screen: props => <PopularTabPage {...props} labelName={item.name} />,
-        navigationOptions: {
-          tabBarLabel: item.name
+      if(item.checked) {
+        tab[`tab${idx}`] = {
+          screen: props => <PopularTabPage {...props} labelName={item.name} />,
+          navigationOptions: {
+            tabBarLabel: item.name
+          }
         }
       }
     })
     return tab
   }
   createTopTabNavigator() {
+    const { theme } = this.props
     let tn =  createMaterialTopTabNavigator(this.createTopTabs(), {
       lazy: true,
       tabBarOptions: {
@@ -57,7 +59,7 @@ class PopularPage extends Component{
         upperCaseLabel: false,
         scrollEnabled: true,
         style: {
-          backgroundColor: 'turquoise'
+          backgroundColor: theme.themeColor
         },
         indicatorStyle: styles.indicatorStyle
       }
@@ -65,14 +67,15 @@ class PopularPage extends Component{
     return createAppContainer(tn)
   }
   render() {
+    const { theme } = this.props
     let statusBar = {
-        backgroundColor: 'hotpink',
+        backgroundColor: theme.themeColor,
         barStyle: 'light-content',
     };
     let navigationBar = <NavigationBar
         title={'最热'}
         statusBar={statusBar}
-        style={{backgroundColor: 'turquoise'}}
+        style={theme.styles.navBar}
     />;
     let TopTab = this.props.labels.length ? this.createTopTabNavigator() : null
     return <View style={styles.container}>
@@ -82,7 +85,8 @@ class PopularPage extends Component{
   }
 }
 const mapPopularPageStateToProps = state => ({
-  labels: state.labelLanguage.labels
+  labels: state.labelLanguage.labels,
+  theme: state.theme.theme
 })
 const mapPopularPagDispatchToProps =  dispatch => ({
   onLoadLabel() {
@@ -147,24 +151,30 @@ class PopularTab extends Component {
   }
   createItem(data) {
     const { item } = data
+    const { theme } = this.props
     return <PopularItem
+              theme={theme}
               projectModel={item}
               onSelect={callback =>  NavigationUtils.toTargetPage(
-                'DetailPage', {item:item,flag: FLAG_STORAGE.flag_popular,callback})
+                  'DetailPage', 
+                  {item,theme,flag: FLAG_STORAGE.flag_popular,callback}
+                )
               }
               onFavorite={(item, isFavorite) => favoriteCheckUtil.onFavorite(favoriteUtil, item.item, isFavorite, FLAG_STORAGE.flag_popular)}
            />
   }
   getIndicator() {
+    const { theme } = this.props
     return this.handleStore().hideLoadingMore ? null :
           <View style={styles.indicatorContainer}>
             <ActivityIndicator
-              style={styles.indicator}
+              style={{color: theme.themeColor}}
             />
-            <Text>加载更多...</Text>
+            <Text style={{color: theme.themeColor}}>加载更多...</Text>
           </View>
   }
   render() {
+    const { theme } = this.props
     let store = this.handleStore()
     return (
       <View style={{flex: 1}}>
@@ -175,10 +185,10 @@ class PopularTab extends Component {
           refreshControl={
             <RefreshControl
               title={'玩命加载中...'}
-              titleColor={THEME_COLOR}
+              titleColor={theme.themeColor}
               refreshing={store.isLoading}
-              color={[THEME_COLOR]}
-              tintColor={THEME_COLOR}
+              color={[theme.themeColor]}
+              tintColor={theme.themeColor}
               onRefresh={() => this.loadData()}
             />
           }
@@ -209,7 +219,8 @@ class PopularTab extends Component {
 }
 
 const mapStateToProps = state => ({
-  popular: state.popular
+  popular: state.popular,
+  theme: state.theme.theme
 })
 const mapDispatchToProps =  dispatch => ({
   onGetPopularList(url, labelName, pageSize, favoriteUtil) {
@@ -243,7 +254,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   indicator: {
-    color: 'hotpink',
     margin: 10
   }
 });

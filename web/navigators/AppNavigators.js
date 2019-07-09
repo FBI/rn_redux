@@ -6,6 +6,8 @@ import AboutPage from '../views/About/AboutPage'
 import AboutMePage from '../views/About/AboutMePage'
 import WebViewPage from '../views/WebViewPage'
 import CustomPage from  '../views/CustomPage'
+import CustomThemePage from  '../views/CustomThemePage'
+import SortPage from  '../views/SortPage'
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from "react-navigation-redux-helpers";
 export const rootCom = 'Init' // 定义根路由
 
@@ -45,6 +47,18 @@ const MainNavigator = createStackNavigator(
         },
         CustomPage: {
             screen: CustomPage,
+            navigationOptions: {
+                header: null,
+            }
+        },
+        CustomThemePage: {
+            screen: CustomThemePage,
+            navigationOptions: {
+                header: null,
+            }
+        },
+        SortPage: {
+            screen: SortPage,
             navigationOptions: {
                 header: null,
             }

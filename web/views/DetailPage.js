@@ -7,10 +7,10 @@
  */
 
 import React, { Component } from 'react';
-import {StyleSheet, View, DeviceInfo, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, DeviceInfo, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview'
 import NavigationBar from '../commons/NavigationBar'
-import NavigationUtils from '../navigators/NavigationUtils'
+import navigationUtils from '../navigators/NavigationUtils'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import viewsUtil from '../utils/viewsUtil';
 import favoriteUtils from '../utils/favoriteUtil'
@@ -19,10 +19,11 @@ const TRENDING_URL = 'https://github.com/'
 export default class DetailPage extends Component{
   constructor(props) {
     super(props) 
-    const { item, flag } = this.props.navigation.state.params
+    const { item, flag, theme } = this.props.navigation.state.params
     const { fullName, full_name, html_url } = item.item
     let url = html_url || (TRENDING_URL + fullName)
     let title = fullName || full_name
+    this.theme = theme
     this.favoriteUtil = new favoriteUtils(flag)
     this.state = {
       canGoBack: false,
@@ -33,7 +34,7 @@ export default class DetailPage extends Component{
 
   }
   goBack() {
-    this.state.canGoBack ? this.webView.goBack() : NavigationUtils.goBack(this.props.navigation)
+    this.state.canGoBack ? this.webView.goBack() : navigationUtils.goBack(this.props.navigation)
   }
   handleNaviStateChange(evt) {
     this.setState({
@@ -78,6 +79,7 @@ export default class DetailPage extends Component{
           leftButton={viewsUtil.getLeftBackButton(() => this.goBack())}
           rightButton={this.renderRightButton()}
           titleLayoutStyle={titleLayoutStyle}
+          style={this.theme.styles.navBar}
           title={title}
         />
         <WebView

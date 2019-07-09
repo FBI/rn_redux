@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import { View, Alert, ScrollView, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import CheckBox from 'react-native-check-box'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import BackPressUtil from "../utils/BackPressUtil";
-import NavigationUtil from '../navigators/NavigationUtils'
-import LabelLanguageUtil from '../utils/labelLanguageUtil'
 import viewsUtil from '../utils/viewsUtil'
+import arrayaUtil from '../utils/arrayUtil'
+import BackPressUtil from "../utils/BackPressUtil";
+import navigationUtil from '../navigators/NavigationUtils'
+import LabelLanguageUtil from '../utils/labelLanguageUtil'
 import NavigationBar from '../commons/NavigationBar'
 import actions from '../action'
 
@@ -21,6 +22,14 @@ class CustomPage extends Component {
         this.state = {
             data: []
         }
+    }
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.data !== CustomPage.getLabelLanguage(nextProps, null, prevState)) {
+            return {
+                data: CustomPage.getLabelLanguage(nextProps, null, prevState),
+            }
+        }
+        return null;
     }
     /**
      * 获取标签
@@ -60,20 +69,57 @@ class CustomPage extends Component {
         this.backPress.componentWillUnmount();
     }
     onBack() {
-        NavigationUtil.goBack(this.props.navigation);
+        if (this.changeValues.length > 0) {
+            Alert.alert('提示', '要保存修改吗？',
+                [
+                    {
+                        text: '否', onPress: () => {
+                            navigationUtil.goBack(this.props.navigation)
+                        }
+                    }, 
+                    {
+                        text: '是', onPress: () => {
+                            this.onSave();
+                        }
+                    }
+                ])
+        } else {
+            navigationUtil.goBack(this.props.navigation)
+        }
     }
     onSave() {
-        console.log('onSage ddddd')
+        if (!this.changeValues.length) {
+            navigationUtil.goBack(this.props.navigation);
+            return;
+        }
+        let data;
+        if (this.isRemoveLabel) {//移除标签的特殊处理
+            for (let i = 0, l = this.changeValues.length; i < l; i++) {
+                arrayaUtil.remove(data = CustomPage.getLabelLanguage(this.props, true), this.changeValues[i], "name");
+            }
+        }
+        //更新本地数据
+        this.labelLanguageUtil.save(data || this.state.data);
+        const { loadData } = this.props;
+        //更新store
+        loadData(this.params.flag);
+        navigationUtil.goBack(this.props.navigation);
     }
-    onClick() {
-        console.log('hahaha click')
+    onClick(data, index) {
+        data.checked = !data.checked;
+        arrayaUtil.updateArray(this.changeValues, data);
+        this.state.data[index] = data;//更新state以便显示选中状态
+        this.setState({
+            data: this.state.data
+        })
     }
     _checkedImage(checked) {
+        const { theme } = this.props
         return <Ionicons
             name={checked ? 'ios-checkbox' : 'md-square-outline'}
             size={20}
             style={{
-                color: 'hotpink',
+                color: theme.themeColor,
             }}/>
     }
     renderCheckBox(data, index) {
@@ -105,12 +151,13 @@ class CustomPage extends Component {
         return views;
     }
     render() {
+        const { theme } = this.props
         let title = this.isRemoveLabel ? '标签移除' : '自定义标签';
         title = this.params.flag === 'language' ? '自定义语言' : title;
         let rightButtonTitle = this.isRemoveLabel ? '移除' : '保存';
         let navigationBar = <NavigationBar
             title={title}
-            style={{backgroundColor: 'hotpink'}}
+            style={theme.styles.navBar}
             leftButton={viewsUtil.getLeftBackButton(() => this.onBack())}
             rightButton={viewsUtil.getRightButton(rightButtonTitle, () => this.onSave())}
         />;
@@ -138,8 +185,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'darkgray',
     }
 })
-const mapStateToProps = ({ labelLanguage }) => ({
-    labelLanguage
+const mapStateToProps = state => ({
+    labelLanguage: state.labelLanguage,
+    theme: state.theme.theme
 })
 const mapDispatchToProps = dispatch => ({
     loadData(flag) {

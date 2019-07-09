@@ -21,12 +21,12 @@ import favoriteCheckUtil from '../utils/favoriteCheckUtil'
 import EventBus from 'react-native-event-bus'
 const THEME_COLOR = 'hotpink'
 
-export default class FavoritePage extends Component{
+class FavoritePage extends Component{
   constructor(props) {
     super(props)
   }
   createTopTabNavigator() {
-    if(this.tabNav) return this.tabNav
+    const { theme } = this.props
     let tn =  createMaterialTopTabNavigator(
       {
         PopularPage: {
@@ -49,23 +49,24 @@ export default class FavoritePage extends Component{
           labelStyle: styles.labelStyle,
           upperCaseLabel: false,
           style: {
-            backgroundColor: 'turquoise'
+            backgroundColor: theme.themeColor
           },
           indicatorStyle: styles.indicatorStyle
         }
       }
     )
-    return this.tabNav = createAppContainer(tn)
+    return createAppContainer(tn)
   }
   render() {
+    const { theme } = this.props
     let statusBar = {
-        backgroundColor: 'hotpink',
+        backgroundColor: theme.themeColor,
         barStyle: 'light-content',
     };
     let navigationBar = <NavigationBar
         title={'收藏'}
         statusBar={statusBar}
-        style={{backgroundColor: 'turquoise'}}
+        style={theme.styles.navBar}
     />;
     let TopTab = this.createTopTabNavigator()
     return <View style={styles.container}>
@@ -74,6 +75,10 @@ export default class FavoritePage extends Component{
            </View>
   }
 }
+const mapFavoriteStateToProps = state => ({
+  theme: state.theme.theme
+})
+export default connect(mapFavoriteStateToProps, null)(FavoritePage)
 
 class FavoriteTab extends Component {
   constructor(props) {
@@ -117,12 +122,15 @@ class FavoriteTab extends Component {
   }
   createItem(data) {
     const { item } = data
+    const { theme } = this.props
     const FavoriteItem = this.labelName === 'popular' ? PopularItem : TrendingItem
     return <FavoriteItem
+              theme={theme}
               projectModel={item}
               onSelect={callback =>  NavigationUtils.toTargetPage(
                   'DetailPage', {
                       item,
+                      theme,
                       flag: this.labelName,
                       callback
                   }
@@ -185,7 +193,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  favorite: state.favorite
+  favorite: state.favorite,
+  theme: state.theme.theme
 })
 const mapDispatchToProps =  dispatch => ({
   getFavoriteData(labelName, isShowLoading) {

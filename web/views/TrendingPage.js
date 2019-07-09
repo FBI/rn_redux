@@ -44,16 +44,20 @@ class TrendingPage extends Component{
     let tab = {}
     const { languages } = this.props
     languages.forEach((item,idx) => {
-      tab[`tab${idx}`] = {
-        screen: props => <TrendingTabPage {...props} labelName={item.name} timeSpan={this.state.timeSpan} />,
-        navigationOptions: {
-          tabBarLabel: item.name
+      if(item.checked) {
+        tab[`tab${idx}`] = {
+          screen: props => <TrendingTabPage {...props} labelName={item.name} timeSpan={this.state.timeSpan} />,
+          navigationOptions: {
+            tabBarLabel: item.name
+          }
         }
       }
+      
     })
     return tab
   }
   createTopTabNavigator() {
+    const { theme } = this.props
     let tn =  createMaterialTopTabNavigator(this.createTopTabs(), {
       lazy: true,
       tabBarOptions: {
@@ -63,7 +67,7 @@ class TrendingPage extends Component{
         upperCaseLabel: false,
         scrollEnabled: true,
         style: {
-          backgroundColor: 'turquoise'
+          backgroundColor: theme.themeColor
         },
         indicatorStyle: styles.indicatorStyle
       }
@@ -106,14 +110,15 @@ class TrendingPage extends Component{
     DeviceEventEmitter.emit('select_timespan', timeSpan)
   }
   render() {
+    const { theme } = this.props
     let statusBar = {
-        backgroundColor: 'hotpink',
+        backgroundColor: theme.themeColor,
         barStyle: 'light-content',
     };
     let navigationBar = <NavigationBar
             titleView={this.renderTitleView()}
             statusBar={statusBar}
-            style={{backgroundColor: 'turquoise'}}
+            style={theme.styles.navBar}
         />;
     let TopTab = this.props.languages.length ? this.createTopTabNavigator() : null
     return <View style={styles.container}>
@@ -124,7 +129,8 @@ class TrendingPage extends Component{
   }
 }
 const mapTrendingPageStateToProps = state => ({
-  languages: state.labelLanguage.languages
+  languages: state.labelLanguage.languages,
+  theme: state.theme.theme
 })
 const mapTrendingPagDispatchToProps =  dispatch => ({
   onLoadLanguage() {
@@ -193,22 +199,30 @@ class TrendingTab extends Component {
   }
   createItem(data) {
     const { item } = data
+    const { theme } = this.props
     return <TrendingItem
+              theme={theme}
               projectModel={item}
-              onSelect={callback => NavigationUtils.toTargetPage('DetailPage', {item, flag: FLAG_STORAGE.flag_trending,callback})}
+              onSelect={callback => NavigationUtils.toTargetPage(
+                'DetailPage', 
+                {item, theme, flag: FLAG_STORAGE.flag_trending,callback}
+                )
+              }
               onFavorite={(item, isFavorite) => favoriteCheckUtil.onFavorite(favoriteUtil, item.item, isFavorite, FLAG_STORAGE.flag_trending)}
            />
   }
   getIndicator() {
+    const { theme } = this.props
     return this.handleStore().hideLoadingMore ? null :
           <View style={styles.indicatorContainer}>
             <ActivityIndicator
-              style={styles.indicator}
+              style={{color: theme.themeColor}}
             />
-            <Text>加载更多...</Text>
+            <Text style={{color: theme.themeColor}}>加载更多...</Text>
           </View>
   }
   render() {
+    const { theme } = this.props
     let store = this.handleStore()
     return (
       <View style={{flex: 1}}>
@@ -219,10 +233,10 @@ class TrendingTab extends Component {
           refreshControl={
             <RefreshControl
               title={'玩命加载中...'}
-              titleColor={THEME_COLOR}
+              titleColor={theme.themeColor}
               refreshing={store.isLoading}
-              color={[THEME_COLOR]}
-              tintColor={THEME_COLOR}
+              color={[theme.themeColor]}
+              tintColor={theme.themeColor}
               onRefresh={() => this.loadData()}
             />
           }
@@ -278,7 +292,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  trending: state.trending
+  trending: state.trending,
+  theme: state.theme.theme
 })
 const mapDispatchToProps =  dispatch => ({
   onGetTrendingList(url, labelName, pageSize, favoriteUtil) {

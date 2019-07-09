@@ -1,4 +1,4 @@
-import {AsyncStorage,} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import labels from '../config/labels'
 import languages from '../config/languages'
 

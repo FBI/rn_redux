@@ -10,7 +10,8 @@ import globalStyle from '../styles/globalStyle';
 export default class WebViewPage extends Component {
     constructor(props) {
         super(props);
-        const { title, url } = this.props.navigation.state.params;
+        const { title, url, theme } = this.props.navigation.state.params;
+        this.theme = theme
         this.state = {
             title,
             url,
@@ -46,6 +47,7 @@ export default class WebViewPage extends Component {
     render() {
         let navigationBar = <NavigationBar
             title={this.state.title}
+            style={this.theme.styles.navBar}
             leftButton={viewsUtil.getLeftBackButton(() => this.onBackPress())}
         />;
 

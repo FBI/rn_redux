@@ -9,13 +9,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Linking, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { connect } from 'react-redux'
+import actions from '../action'
 import NavigationBar from '../commons/NavigationBar'
 import navigationUtil from  '../navigators/NavigationUtils'
 import moreMenuUtil from '../utils/moreMenuUtil'
 import viewsUtil from '../utils/viewsUtil'
 import globalStyle from '../styles/globalStyle'
 
-export default class MyPage extends Component{
+class MyPage extends Component{
   onClick(menu) {
     let routeName = ''
     let params = {}
@@ -38,6 +40,18 @@ export default class MyPage extends Component{
             params.isRemoveLabel = menu === moreMenuUtil.Remove_Key;
             params.flag = menu !== moreMenuUtil.Custom_Language ? 'label' : 'language';
             break;
+      case moreMenuUtil.Sort_Key:
+            routeName = 'SortPage';
+            params.flag = 'label';
+            break;
+      case moreMenuUtil.Sort_Language:
+            routeName = 'SortPage';
+            params.flag = 'language';
+            break;
+      case moreMenuUtil.Custom_Theme:
+        const { onShowCustomThemeView } = this.props;
+        onShowCustomThemeView(true);
+        break;
       case moreMenuUtil.Feedback:
             const url = 'mailto://18311433156@163.com';
             Linking.canOpenURL(url)
@@ -60,17 +74,19 @@ export default class MyPage extends Component{
     }
   }
   renderItem(menu) {
-    return viewsUtil.getMenuItem(() => this.onClick(menu), menu, 'hotpink');
+   const { theme } = this.props
+    return viewsUtil.getMenuItem(() => this.onClick(menu), menu, theme.themeColor);
   }
   render() {
+    const { theme } = this.props
     let statusBar = {
-        backgroundColor: 'hotpink',
+        backgroundColor: theme.themeColor,
         barStyle: 'light-content',
     };
     let navigationBar = <NavigationBar
         title={'我的'}
         statusBar={statusBar}
-        style={{backgroundColor: 'turquoise'}}
+        style={theme.styles.navBar}
     />;
     return (
       <View style={[globalStyle.root_container,styles['myPage-wrapper']]}>
@@ -87,7 +103,7 @@ export default class MyPage extends Component{
                   size={40}
                   style={{
                       marginRight: 10,
-                      color: 'hotpink',
+                      color: theme.themeColor,
                   }}
               />
               <Text>GitHub Client</Text>
@@ -155,3 +171,12 @@ const styles = StyleSheet.create({
     color: 'gray'
  }
 });
+const mapStateToProps = state => ({
+  theme: state.theme.theme
+})
+const mapDispatchToProps = dispatch => ({
+  onShowCustomThemeView(isShow) {
+    dispatch(actions.onShowCustomThemeView(isShow))
+  }
+})
+export default connect(mapStateToProps,mapDispatchToProps)(MyPage)
