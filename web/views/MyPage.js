@@ -19,12 +19,13 @@ import globalStyle from '../styles/globalStyle'
 
 class MyPage extends Component{
   onClick(menu) {
-    let routeName = ''
-    let params = {}
+    const { theme } = this.props
+    let routeName, params = { theme }
     switch(menu) {
       case moreMenuUtil.Tutorial: 
             routeName = 'WebViewPage';
             params.title = '教程';
+           // params.theme = this.props.theme
             params.url = 'https://github.com/Solido/awesome-flutter';
             break;
       case moreMenuUtil.About:
@@ -89,7 +90,7 @@ class MyPage extends Component{
         style={theme.styles.navBar}
     />;
     return (
-      <View style={[globalStyle.root_container,styles['myPage-wrapper']]}>
+      <View style={[globalStyle.root_container]}>
         {navigationBar}
         <ScrollView>
           <TouchableOpacity 
@@ -149,7 +150,7 @@ class MyPage extends Component{
 
 const styles = StyleSheet.create({
   'myPage-wrapper': {
-    marginTop: 30,
+    //marginTop: 30,
   },
   item: {
     backgroundColor: 'white',

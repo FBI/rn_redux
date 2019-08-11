@@ -7,13 +7,14 @@
  */
 
 import React, { Component } from 'react';
-import { View, BackHandler } from 'react-native';
+import { BackHandler,TextInput } from 'react-native';
 import NavigationUtils from '../navigators/NavigationUtils'
 import DynamicTabNavigator from '../navigators/DynamicTabNavigator'
 import { NavigationActions } from "react-navigation";
 import { connect } from 'react-redux'
 import actions from '../action'
 import CustomThemePage from './CustomThemePage'
+import SafeAreaViewPlus from '../commons/SafeaAreaViewPlus'
 
 class HomePage extends Component{
   componentDidMount() {
@@ -39,10 +40,10 @@ class HomePage extends Component{
   }
   render() {
     NavigationUtils.navigation = this.props.navigation
-    return <View style={{flex: 1}}>
+    return <SafeAreaViewPlus topColor={this.props.theme.themeColor}>
               <DynamicTabNavigator />
               {this.renderCustomThemeView()}
-           </View>
+           </SafeAreaViewPlus>
   }
 }
 const mapStateToProps = state => ({

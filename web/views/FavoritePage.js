@@ -168,8 +168,7 @@ class FavoriteTab extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 30
+    flex: 1
   },
   tabStyle: {
     minWidth: 10

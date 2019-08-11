@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { SafeAreaView } from 'react-native'
 import { WebView }from 'react-native-webview';
 import NavigationBar from '../commons/NavigationBar'
 import viewsUtil from "../utils/viewsUtil";
 import NavigationUtil from "../navigators/NavigationUtils";
 import BackPressUtil from "../utils/BackPressUtil";
-import globalStyle from '../styles/globalStyle';
+import SafeAreaViewPlus from '../commons/SafeaAreaViewPlus'
 
 export default class WebViewPage extends Component {
     constructor(props) {
@@ -52,8 +51,8 @@ export default class WebViewPage extends Component {
         />;
 
         return (
-            <SafeAreaView
-                style={globalStyle.root_container}
+            <SafeAreaViewPlus
+                topColor={this.theme.themeColor}
             >
                 {navigationBar}
                 <WebView
@@ -62,7 +61,7 @@ export default class WebViewPage extends Component {
                     onNavigationStateChange={e => this.onNavigationStateChange(e)}
                     source={{uri: this.state.url}}
                 />
-            </SafeAreaView>
+            </SafeAreaViewPlus>
         );
     }
 }

@@ -10,7 +10,7 @@ import navigationUtil from '../navigators/NavigationUtils'
 import LabelLanguageUtil from '../utils/labelLanguageUtil'
 import NavigationBar from '../commons/NavigationBar'
 import actions from '../action'
-import globalStyle from '../styles/globalStyle'
+import SafeAreaViewPlus from '../commons/SafeaAreaViewPlus'
 
 class SortPage extends Component {
     constructor(props) {
@@ -140,8 +140,8 @@ class SortPage extends Component {
             style={theme.styles.navBar}
             rightButton={viewsUtil.getRightButton('保存', () => this.onSave())}
         />;
-        return <View
-                    style={[globalStyle.root_container,styles.container]}
+        return <SafeAreaViewPlus
+                    topColor={theme.themeColor}
                 >
                     {navigationBar}
                     <SortableListView
@@ -153,7 +153,7 @@ class SortPage extends Component {
                         }}
                         renderRow={row => <SortCell data={row} theme={theme} {...this.params}/>}
                     />
-                </View>
+                </SafeAreaViewPlus>
     }
 }
 class SortCell extends Component {
@@ -175,7 +175,7 @@ class SortCell extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        marginTop: 30
+        //marginTop: 30
     },
     hidden: {
         height: 0

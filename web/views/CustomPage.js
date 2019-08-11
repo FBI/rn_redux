@@ -10,6 +10,7 @@ import navigationUtil from '../navigators/NavigationUtils'
 import LabelLanguageUtil from '../utils/labelLanguageUtil'
 import NavigationBar from '../commons/NavigationBar'
 import actions from '../action'
+import SafeAreaViewPlus from '../commons/SafeaAreaViewPlus'
 
 class CustomPage extends Component {
     constructor(props) {
@@ -161,14 +162,14 @@ class CustomPage extends Component {
             leftButton={viewsUtil.getLeftBackButton(() => this.onBack())}
             rightButton={viewsUtil.getRightButton(rightButtonTitle, () => this.onSave())}
         />;
-        return <View
-                    style={styles.container}
+        return <SafeAreaViewPlus
+                    topColor={theme.themeColor}
                 >
                     {navigationBar}
                     <ScrollView>
                         {this.renderView()}
                     </ScrollView>
-                </View>
+                </SafeAreaViewPlus>
     }
 }
 

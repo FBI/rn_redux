@@ -24,7 +24,6 @@ import DataSource, { FLAG_STORAGE } from '../asyncStorage/dataSource'
 import actions from '../action'
 import EventBus from 'react-native-event-bus'
 const URL = 'https://github.com/trending/';
-const THEME_COLOR = 'hotpink'
 const pageSize = 10
 const favoriteUtil = new FavoriteUtil(FLAG_STORAGE.flag_trending)
 
@@ -268,7 +267,7 @@ class TrendingTab extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30
+    //marginTop: 30
   },
   tabStyle: {
     minWidth: 10

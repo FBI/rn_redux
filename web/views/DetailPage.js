@@ -7,13 +7,14 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, View, DeviceInfo, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview'
 import NavigationBar from '../commons/NavigationBar'
 import navigationUtils from '../navigators/NavigationUtils'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import viewsUtil from '../utils/viewsUtil';
 import favoriteUtils from '../utils/favoriteUtil'
+import SafeAreaViewPlus from '../commons/SafeaAreaViewPlus'
 const TRENDING_URL = 'https://github.com/'
 
 export default class DetailPage extends Component{
@@ -74,7 +75,7 @@ export default class DetailPage extends Component{
     const { title, url } = this.state
     const titleLayoutStyle = title.length > 20 ? {paddingRight: 30} : null;
     return (
-      <View style={styles.container}>
+      <SafeAreaViewPlus topColor={this.theme.themeColor}>
         <NavigationBar 
           leftButton={viewsUtil.getLeftBackButton(() => this.goBack())}
           rightButton={this.renderRightButton()}
@@ -88,14 +89,7 @@ export default class DetailPage extends Component{
           startInLoadingState={true}
           onNavigationStateChange={evt => this.handleNaviStateChange(evt)}
         />
-      </View>
+      </SafeAreaViewPlus>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: DeviceInfo.isIPhoneX_deprecated ? 30 : 0
-  }
-});

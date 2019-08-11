@@ -23,8 +23,7 @@ class AboutPage extends Component {
     }
     onClick(menu) {
         const { theme } = this.props
-        let routeName = ''
-        let params = {}
+        let routeName, params = { theme }
         switch(menu) {
             case moreMenuUtil.Tutorial: 
                     routeName = 'WebViewPage';
