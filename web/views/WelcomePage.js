@@ -9,6 +9,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Animated, Easing, ImageBackground } from 'react-native';
 import navigationUtil from '../navigators/NavigationUtils'
+import SplashScreen from 'react-native-splash-screen'
+
 export default class WelcomePage extends Component{
   constructor(props) {
     super(props)
@@ -16,21 +18,27 @@ export default class WelcomePage extends Component{
   }
   componentDidMount() {
     this.timer = setTimeout(() => {
+      SplashScreen.hide();
       navigationUtil.resetToHomePage(this.props)
-    },1000)
+    },200)
   }
   componentWillUnmount() {
     this.timer && clearTimeout(this.timer)
   }
   render() {
     return (
-      <ImageBackground style={{flex:1}} source={require('../images/loading.gif')}>
       <View >
         <FadeInView>
           <Text style={styles.desc}>Welcome!</Text>
         </FadeInView>
       </View>
-      </ImageBackground>
+      // <ImageBackground style={{flex:1}} source={require('../images/loading.gif')}>
+      // <View >
+      //   <FadeInView>
+      //     <Text style={styles.desc}>Welcome!</Text>
+      //   </FadeInView>
+      // </View>
+      // </ImageBackground>
     );
   }
 }
