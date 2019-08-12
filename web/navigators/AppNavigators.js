@@ -8,6 +8,7 @@ import WebViewPage from '../views/WebViewPage'
 import CustomPage from  '../views/CustomPage'
 import CustomThemePage from  '../views/CustomThemePage'
 import SortPage from  '../views/SortPage'
+import CodePushPage from '../views/CodePushPage'
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from "react-navigation-redux-helpers";
 export const rootCom = 'Init' // 定义根路由
 
@@ -71,6 +72,12 @@ const MainNavigator = createStackNavigator(
         },
         DetailPage: {
             screen: DetailPage,
+            navigationOptions: {
+                header: null
+            }
+        },
+        CodePushPage: {
+            screen: CodePushPage,
             navigationOptions: {
                 header: null
             }

@@ -22,7 +22,6 @@ export default class SafeAreaViewPlus extends Component {
 
     genSafeAreaViewPlus() {
         const { children, topColor, bottomColor, topInset, bottomInset } = this.props;
-        console.log('也不知道安卓怎么回事')
         return  <View style={[styles.container, this.props.style]}>
                     {this.getTopArea(topColor, topInset)}
                     {children}

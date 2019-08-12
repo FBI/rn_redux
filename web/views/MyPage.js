@@ -69,6 +69,9 @@ class MyPage extends Component{
                     console.error('哈哈哈哈，打不开邮箱啊', e);
             });
             break;
+        case moreMenuUtil.CodePush:
+           routeName = 'CodePushPage';
+           break;
     }
     if (routeName) {
       navigationUtil.toTargetPage(routeName, params);
