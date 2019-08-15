@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { BackHandler,TextInput } from 'react-native';
+import { BackHandler } from 'react-native';
 import NavigationUtils from '../navigators/NavigationUtils'
 import DynamicTabNavigator from '../navigators/DynamicTabNavigator'
 import { NavigationActions } from "react-navigation";
