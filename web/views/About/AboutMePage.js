@@ -30,7 +30,7 @@ class AboutMePage extends Component {
         if (!tab) return;
         const { url, title, account } = tab
         if (url) {// url存在，则跳转到WebViewPage页面.否则打开邮箱或者复制联系方式
-            navigationUtil.toTargetPage('WebViewPage', { title, url });
+            navigationUtil.toTargetPage('WebViewPage', { title, url,theme: this.props.theme });
             return;
         }
         if (account && account.indexOf('@') > -1) {

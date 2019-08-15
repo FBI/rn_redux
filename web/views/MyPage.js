@@ -118,7 +118,7 @@ class MyPage extends Component{
               style={{
                   marginRight: 10,
                   alignSelf: 'center',
-                  color: 'hotpink',
+                  color: theme.themeColor,
               }}
             />
           </TouchableOpacity>

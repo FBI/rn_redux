@@ -7,10 +7,9 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Animated, Easing, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
 import navigationUtil from '../navigators/NavigationUtils'
 import SplashScreen from 'react-native-splash-screen'
-
 export default class WelcomePage extends Component{
   constructor(props) {
     super(props)

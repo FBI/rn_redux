@@ -24,18 +24,18 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		17702D862301AF6E00E676D3 /* back-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D782301AF6E00E676D3 /* back-icon@3x.png */; };
-		17702D872301AF6E00E676D3 /* back-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D792301AF6E00E676D3 /* back-icon@2x.png */; };
-		17702D882301AF6E00E676D3 /* back-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D7A2301AF6E00E676D3 /* back-icon.png */; };
-		17702D892301AF6E00E676D3 /* back-icon-mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D7B2301AF6E00E676D3 /* back-icon-mask.png */; };
-		17702D8A2301AF6E00E676D3 /* ic_check_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D7E2301AF6E00E676D3 /* ic_check_box.png */; };
-		17702D8B2301AF6E00E676D3 /* ic_indeterminate_check_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D7F2301AF6E00E676D3 /* ic_indeterminate_check_box.png */; };
-		17702D8C2301AF6E00E676D3 /* ic_check_box_outline_blank@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D802301AF6E00E676D3 /* ic_check_box_outline_blank@3x.png */; };
-		17702D8D2301AF6E00E676D3 /* ic_check_box_outline_blank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D812301AF6E00E676D3 /* ic_check_box_outline_blank@2x.png */; };
-		17702D8E2301AF6E00E676D3 /* ic_check_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D822301AF6E00E676D3 /* ic_check_box@3x.png */; };
-		17702D8F2301AF6E00E676D3 /* ic_check_box_outline_blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D832301AF6E00E676D3 /* ic_check_box_outline_blank.png */; };
-		17702D902301AF6E00E676D3 /* ic_check_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D842301AF6E00E676D3 /* ic_check_box@2x.png */; };
-		17702D912301AF6E00E676D3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 17702D852301AF6E00E676D3 /* main.jsbundle */; };
+		17702DA62301B2AE00E676D3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 17702D922301B2AE00E676D3 /* main.jsbundle */; };
+		17702DA72301B2AE00E676D3 /* back-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D992301B2AE00E676D3 /* back-icon@3x.png */; };
+		17702DA82301B2AE00E676D3 /* back-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D9A2301B2AE00E676D3 /* back-icon@2x.png */; };
+		17702DA92301B2AE00E676D3 /* back-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D9B2301B2AE00E676D3 /* back-icon.png */; };
+		17702DAA2301B2AE00E676D3 /* back-icon-mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D9C2301B2AE00E676D3 /* back-icon-mask.png */; };
+		17702DAB2301B2AE00E676D3 /* ic_check_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702D9F2301B2AE00E676D3 /* ic_check_box.png */; };
+		17702DAC2301B2AE00E676D3 /* ic_indeterminate_check_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702DA02301B2AE00E676D3 /* ic_indeterminate_check_box.png */; };
+		17702DAD2301B2AE00E676D3 /* ic_check_box_outline_blank@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702DA12301B2AE00E676D3 /* ic_check_box_outline_blank@3x.png */; };
+		17702DAE2301B2AE00E676D3 /* ic_check_box_outline_blank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702DA22301B2AE00E676D3 /* ic_check_box_outline_blank@2x.png */; };
+		17702DAF2301B2AE00E676D3 /* ic_check_box@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702DA32301B2AE00E676D3 /* ic_check_box@3x.png */; };
+		17702DB02301B2AE00E676D3 /* ic_check_box_outline_blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702DA42301B2AE00E676D3 /* ic_check_box_outline_blank.png */; };
+		17702DB12301B2AE00E676D3 /* ic_check_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17702DA52301B2AE00E676D3 /* ic_check_box@2x.png */; };
 		1D04D8A1AFC941F0ABE312CC /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A452138BCB2C4304BEABB7D7 /* FontAwesome5_Solid.ttf */; };
 		1DEBF706795D44698E0524DB /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C7DDC128A08428DB0288274 /* libRNCWebView.a */; };
 		1FCD6CB0A1F84673A5ACEBF5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B887A53BD4845E4A9B45CCE /* EvilIcons.ttf */; };
@@ -418,7 +418,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -440,18 +439,18 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = rn_redux/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = rn_redux/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		17702D782301AF6E00E676D3 /* back-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@3x.png"; sourceTree = "<group>"; };
-		17702D792301AF6E00E676D3 /* back-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@2x.png"; sourceTree = "<group>"; };
-		17702D7A2301AF6E00E676D3 /* back-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon.png"; sourceTree = "<group>"; };
-		17702D7B2301AF6E00E676D3 /* back-icon-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon-mask.png"; sourceTree = "<group>"; };
-		17702D7E2301AF6E00E676D3 /* ic_check_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_check_box.png; sourceTree = "<group>"; };
-		17702D7F2301AF6E00E676D3 /* ic_indeterminate_check_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_indeterminate_check_box.png; sourceTree = "<group>"; };
-		17702D802301AF6E00E676D3 /* ic_check_box_outline_blank@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box_outline_blank@3x.png"; sourceTree = "<group>"; };
-		17702D812301AF6E00E676D3 /* ic_check_box_outline_blank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box_outline_blank@2x.png"; sourceTree = "<group>"; };
-		17702D822301AF6E00E676D3 /* ic_check_box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box@3x.png"; sourceTree = "<group>"; };
-		17702D832301AF6E00E676D3 /* ic_check_box_outline_blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_check_box_outline_blank.png; sourceTree = "<group>"; };
-		17702D842301AF6E00E676D3 /* ic_check_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box@2x.png"; sourceTree = "<group>"; };
-		17702D852301AF6E00E676D3 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../bundles/main.jsbundle; sourceTree = "<group>"; };
+		17702D922301B2AE00E676D3 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../bundles/main.jsbundle; sourceTree = "<group>"; };
+		17702D992301B2AE00E676D3 /* back-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@3x.png"; sourceTree = "<group>"; };
+		17702D9A2301B2AE00E676D3 /* back-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon@2x.png"; sourceTree = "<group>"; };
+		17702D9B2301B2AE00E676D3 /* back-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon.png"; sourceTree = "<group>"; };
+		17702D9C2301B2AE00E676D3 /* back-icon-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-icon-mask.png"; sourceTree = "<group>"; };
+		17702D9F2301B2AE00E676D3 /* ic_check_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_check_box.png; sourceTree = "<group>"; };
+		17702DA02301B2AE00E676D3 /* ic_indeterminate_check_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_indeterminate_check_box.png; sourceTree = "<group>"; };
+		17702DA12301B2AE00E676D3 /* ic_check_box_outline_blank@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box_outline_blank@3x.png"; sourceTree = "<group>"; };
+		17702DA22301B2AE00E676D3 /* ic_check_box_outline_blank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box_outline_blank@2x.png"; sourceTree = "<group>"; };
+		17702DA32301B2AE00E676D3 /* ic_check_box@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box@3x.png"; sourceTree = "<group>"; };
+		17702DA42301B2AE00E676D3 /* ic_check_box_outline_blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_check_box_outline_blank.png; sourceTree = "<group>"; };
+		17702DA52301B2AE00E676D3 /* ic_check_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_box@2x.png"; sourceTree = "<group>"; };
 		1BD4A4F00AC74767938FA333 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* rn_redux-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rn_redux-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* rn_redux-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "rn_redux-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -637,9 +636,8 @@
 		13B07FAE1A68108700A75B9A /* rn_redux */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
-				17702D722301AF6E00E676D3 /* assets */,
-				17702D852301AF6E00E676D3 /* main.jsbundle */,
+				17702D932301B2AE00E676D3 /* assets */,
+				17702D922301B2AE00E676D3 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -739,77 +737,77 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		17702D722301AF6E00E676D3 /* assets */ = {
+		17702D932301B2AE00E676D3 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				17702D732301AF6E00E676D3 /* node_modules */,
+				17702D942301B2AE00E676D3 /* node_modules */,
 			);
 			name = assets;
 			path = ../bundles/assets;
 			sourceTree = "<group>";
 		};
-		17702D732301AF6E00E676D3 /* node_modules */ = {
+		17702D942301B2AE00E676D3 /* node_modules */ = {
 			isa = PBXGroup;
 			children = (
-				17702D742301AF6E00E676D3 /* react-navigation-stack */,
-				17702D7C2301AF6E00E676D3 /* react-native-check-box */,
+				17702D952301B2AE00E676D3 /* react-navigation-stack */,
+				17702D9D2301B2AE00E676D3 /* react-native-check-box */,
 			);
 			path = node_modules;
 			sourceTree = "<group>";
 		};
-		17702D742301AF6E00E676D3 /* react-navigation-stack */ = {
+		17702D952301B2AE00E676D3 /* react-navigation-stack */ = {
 			isa = PBXGroup;
 			children = (
-				17702D752301AF6E00E676D3 /* src */,
+				17702D962301B2AE00E676D3 /* src */,
 			);
 			path = "react-navigation-stack";
 			sourceTree = "<group>";
 		};
-		17702D752301AF6E00E676D3 /* src */ = {
+		17702D962301B2AE00E676D3 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				17702D762301AF6E00E676D3 /* views */,
+				17702D972301B2AE00E676D3 /* views */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		17702D762301AF6E00E676D3 /* views */ = {
+		17702D972301B2AE00E676D3 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				17702D772301AF6E00E676D3 /* assets */,
+				17702D982301B2AE00E676D3 /* assets */,
 			);
 			path = views;
 			sourceTree = "<group>";
 		};
-		17702D772301AF6E00E676D3 /* assets */ = {
+		17702D982301B2AE00E676D3 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				17702D782301AF6E00E676D3 /* back-icon@3x.png */,
-				17702D792301AF6E00E676D3 /* back-icon@2x.png */,
-				17702D7A2301AF6E00E676D3 /* back-icon.png */,
-				17702D7B2301AF6E00E676D3 /* back-icon-mask.png */,
+				17702D992301B2AE00E676D3 /* back-icon@3x.png */,
+				17702D9A2301B2AE00E676D3 /* back-icon@2x.png */,
+				17702D9B2301B2AE00E676D3 /* back-icon.png */,
+				17702D9C2301B2AE00E676D3 /* back-icon-mask.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
 		};
-		17702D7C2301AF6E00E676D3 /* react-native-check-box */ = {
+		17702D9D2301B2AE00E676D3 /* react-native-check-box */ = {
 			isa = PBXGroup;
 			children = (
-				17702D7D2301AF6E00E676D3 /* img */,
+				17702D9E2301B2AE00E676D3 /* img */,
 			);
 			path = "react-native-check-box";
 			sourceTree = "<group>";
 		};
-		17702D7D2301AF6E00E676D3 /* img */ = {
+		17702D9E2301B2AE00E676D3 /* img */ = {
 			isa = PBXGroup;
 			children = (
-				17702D7E2301AF6E00E676D3 /* ic_check_box.png */,
-				17702D7F2301AF6E00E676D3 /* ic_indeterminate_check_box.png */,
-				17702D802301AF6E00E676D3 /* ic_check_box_outline_blank@3x.png */,
-				17702D812301AF6E00E676D3 /* ic_check_box_outline_blank@2x.png */,
-				17702D822301AF6E00E676D3 /* ic_check_box@3x.png */,
-				17702D832301AF6E00E676D3 /* ic_check_box_outline_blank.png */,
-				17702D842301AF6E00E676D3 /* ic_check_box@2x.png */,
+				17702D9F2301B2AE00E676D3 /* ic_check_box.png */,
+				17702DA02301B2AE00E676D3 /* ic_indeterminate_check_box.png */,
+				17702DA12301B2AE00E676D3 /* ic_check_box_outline_blank@3x.png */,
+				17702DA22301B2AE00E676D3 /* ic_check_box_outline_blank@2x.png */,
+				17702DA32301B2AE00E676D3 /* ic_check_box@3x.png */,
+				17702DA42301B2AE00E676D3 /* ic_check_box_outline_blank.png */,
+				17702DA52301B2AE00E676D3 /* ic_check_box@2x.png */,
 			);
 			path = img;
 			sourceTree = "<group>";
@@ -1467,35 +1465,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17702D8A2301AF6E00E676D3 /* ic_check_box.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				17702D8C2301AF6E00E676D3 /* ic_check_box_outline_blank@3x.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				17702DAC2301B2AE00E676D3 /* ic_indeterminate_check_box.png in Resources */,
 				A14AAB2C0BB64CAEA5BDFF54 /* AntDesign.ttf in Resources */,
+				17702DB02301B2AE00E676D3 /* ic_check_box_outline_blank.png in Resources */,
+				17702DA62301B2AE00E676D3 /* main.jsbundle in Resources */,
+				17702DA82301B2AE00E676D3 /* back-icon@2x.png in Resources */,
 				12F12A33DBB34CCE9BBBA238 /* Entypo.ttf in Resources */,
-				17702D912301AF6E00E676D3 /* main.jsbundle in Resources */,
-				17702D8B2301AF6E00E676D3 /* ic_indeterminate_check_box.png in Resources */,
-				17702D892301AF6E00E676D3 /* back-icon-mask.png in Resources */,
 				1FCD6CB0A1F84673A5ACEBF5 /* EvilIcons.ttf in Resources */,
+				17702DAA2301B2AE00E676D3 /* back-icon-mask.png in Resources */,
+				17702DAF2301B2AE00E676D3 /* ic_check_box@3x.png in Resources */,
+				17702DB12301B2AE00E676D3 /* ic_check_box@2x.png in Resources */,
+				17702DA72301B2AE00E676D3 /* back-icon@3x.png in Resources */,
 				84BC85F490E74CB8AD76E7FE /* Feather.ttf in Resources */,
-				17702D8E2301AF6E00E676D3 /* ic_check_box@3x.png in Resources */,
-				17702D872301AF6E00E676D3 /* back-icon@2x.png in Resources */,
+				17702DAE2301B2AE00E676D3 /* ic_check_box_outline_blank@2x.png in Resources */,
 				E2EEBA992CB4419A82301BA9 /* FontAwesome.ttf in Resources */,
-				17702D902301AF6E00E676D3 /* ic_check_box@2x.png in Resources */,
 				A5DD559173EA4C908FE496D5 /* FontAwesome5_Brands.ttf in Resources */,
 				B3C3B590807642AF865A1DF3 /* FontAwesome5_Regular.ttf in Resources */,
 				1D04D8A1AFC941F0ABE312CC /* FontAwesome5_Solid.ttf in Resources */,
 				D62FE31D12184DF6906A4048 /* Foundation.ttf in Resources */,
-				17702D862301AF6E00E676D3 /* back-icon@3x.png in Resources */,
-				17702D8D2301AF6E00E676D3 /* ic_check_box_outline_blank@2x.png in Resources */,
 				C61DCD2B923E415A9D3B888D /* Ionicons.ttf in Resources */,
 				E891C5DA0BD341559C43FFE0 /* MaterialCommunityIcons.ttf in Resources */,
 				74362129DB72498790743FEA /* MaterialIcons.ttf in Resources */,
+				17702DA92301B2AE00E676D3 /* back-icon.png in Resources */,
 				4030016379844A398DF448F0 /* Octicons.ttf in Resources */,
+				17702DAB2301B2AE00E676D3 /* ic_check_box.png in Resources */,
+				17702DAD2301B2AE00E676D3 /* ic_check_box_outline_blank@3x.png in Resources */,
 				D7184653AC5D4441861A093A /* SimpleLineIcons.ttf in Resources */,
 				333C8ABCA74E45D4BF4F8541 /* Zocial.ttf in Resources */,
-				17702D882301AF6E00E676D3 /* back-icon.png in Resources */,
-				17702D8F2301AF6E00E676D3 /* ic_check_box_outline_blank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

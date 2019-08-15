@@ -19,7 +19,6 @@ import NavigationUtils from '../navigators/NavigationUtils'
 import FavoriteUtil from '../utils/favoriteUtil'
 import favoriteCheckUtil from '../utils/favoriteCheckUtil'
 import EventBus from 'react-native-event-bus'
-const THEME_COLOR = 'hotpink'
 
 class FavoritePage extends Component{
   constructor(props) {
@@ -141,6 +140,7 @@ class FavoriteTab extends Component {
   }
   render() {
     let store = this.handleStore()
+    const { theme } = this.props
     return (
       <View style={{flex: 1}}>
         <FlatList
@@ -150,10 +150,10 @@ class FavoriteTab extends Component {
           refreshControl={
             <RefreshControl
               title={'玩命加载中...'}
-              titleColor={THEME_COLOR}
+              titleColor={theme.themeColor}
               refreshing={store.isLoading}
-              color={[THEME_COLOR]}
-              tintColor={THEME_COLOR}
+              color={[theme.themeColor]}
+              tintColor={theme.themeColor}
               onRefresh={() => this.loadData(true)}
             />
           }

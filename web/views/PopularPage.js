@@ -168,12 +168,13 @@ class PopularTab extends Component {
     return this.handleStore().hideLoadingMore ? null :
           <View style={styles.indicatorContainer}>
             <ActivityIndicator
-              style={{color: theme.themeColor}}
+              color={theme.themeColor}
             />
             <Text style={{color: theme.themeColor}}>加载更多...</Text>
           </View>
   }
   render() {
+    
     const { theme } = this.props
     let store = this.handleStore()
     return (

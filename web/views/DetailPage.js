@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity,Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview'
 import NavigationBar from '../commons/NavigationBar'
 import navigationUtils from '../navigators/NavigationUtils'
@@ -85,10 +85,16 @@ export default class DetailPage extends Component{
         />
         <WebView
           source={{ url }}
-          ref={val => this.webView = val}
+          style={{
+            width: Dimensions.get('window').width,
+            height: Dimensions.get('window').height,
+          }}
+          ref={webView => this.webView = webView}
           startInLoadingState={true}
           onNavigationStateChange={evt => this.handleNaviStateChange(evt)}
+          onError={e => console.log('e', e)}
         />
+        
       </SafeAreaViewPlus>
     );
   }
