@@ -85,9 +85,6 @@ class DynamicTabNavigator extends Component {
     const tabs = { PopularPage, TrendingPage, FavoritePage, MyPage }
     
     let tn = createBottomTabNavigator(tabs,{
-        // tabBarOptions: {
-        //     activeTintColor: 'cyan'
-        // },
         tabBarComponent: props => <TabBarComponent {...props} theme={this.props.theme} />
     })
     return this.tabs = createAppContainer(tn)

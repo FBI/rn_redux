@@ -20,7 +20,7 @@ export default class PopularItem extends BaseItem {
                             <Text>Author:</Text>
                             <Image 
                                 style={styles.img} 
-                                source={{url: owner.avatar_url}}
+                                source={{uri: owner.avatar_url}}
                             />
                         </View>
                         <View style={styles.starBox}>

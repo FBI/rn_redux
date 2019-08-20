@@ -9,10 +9,10 @@
 import React, {Component} from 'react';
 import { createAppContainer } from "react-navigation";
 import { Provider } from "react-redux";
-import { RootNavigator } from './web/navigators/AppNavigators'
+import { MainNavigator } from './web/navigators/AppNavigators'
 import store from './web/store'
 //YellowBox.ignoreWarnings(['ViewPagerAndroid','PagerAndroid']);
-const RootNavigatorContainer = createAppContainer(RootNavigator)
+const RootNavigatorContainer = createAppContainer(MainNavigator)
 
 export default class App extends Component {
   render() {

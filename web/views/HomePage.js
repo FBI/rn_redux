@@ -7,17 +7,22 @@
  */
 
 import React, { Component } from 'react';
-import { BackHandler,TextInput } from 'react-native';
+import { BackHandler } from 'react-native';
 import NavigationUtils from '../navigators/NavigationUtils'
 import DynamicTabNavigator from '../navigators/DynamicTabNavigator'
 import { NavigationActions } from "react-navigation";
 import { connect } from 'react-redux'
 import actions from '../action'
 import CustomThemePage from './CustomThemePage'
+import SplashScreen from 'react-native-splash-screen'
 import SafeAreaViewPlus from '../commons/SafeaAreaViewPlus'
 
 class HomePage extends Component{
   componentDidMount() {
+    SplashScreen.hide()
+    fetch('https://github.com/trending/javascript?since=weekly').then( res => {
+      console.log(res)
+    })
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
   }
   componentWillUnmount() {

@@ -4729,6 +4729,7 @@ react-native-vector-icons@^6.4.2:
 react-native-webview@^6.9.0:
   version "6.9.0"
   resolved "https://registry.npm.taobao.org/react-native-webview/download/react-native-webview-6.9.0.tgz#d637618fe65ddc9972a55a1d181fd6879a2fcebd"
+  integrity sha1-1jdhj+Zd3JlypVodGB/Wh5ovzr0=
   dependencies:
     escape-string-regexp "1.0.5"
     invariant "2.2.4"

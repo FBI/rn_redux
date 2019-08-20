@@ -12,7 +12,7 @@ export default {
     Remove_Key: {name: '标签移除', Icons: Ionicons, icon: 'md-remove'},
     About_Author: {name: '关于作者', Icons: Octicons, icon: 'smiley'},
     About: {name: '关于', Icons: Ionicons, icon: 'logo-github'},
-    Tutorial: {name: '教程', Icons: Ionicons, icon: 'ios-bookmarks'},
+    Tutorial: {name: 'Awesome-前端', Icons: Ionicons, icon: 'ios-bookmarks'},
     Feedback: {name: '邮件反馈', Icons: MaterialIcons, icon: 'feedback'},
     Share: {name: '分享', Icons: Ionicons, icon: 'md-share'},
     CodePush: {name: 'CodePush', Icons: Ionicons, icon: 'ios-planet'},

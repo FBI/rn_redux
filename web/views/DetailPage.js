@@ -84,7 +84,7 @@ export default class DetailPage extends Component{
           title={title}
         />
         <WebView
-          source={{ url }}
+          source={{ uri: url }}
           style={{
             width: Dimensions.get('window').width,
             height: Dimensions.get('window').height,
@@ -92,7 +92,6 @@ export default class DetailPage extends Component{
           ref={webView => this.webView = webView}
           startInLoadingState={true}
           onNavigationStateChange={evt => this.handleNaviStateChange(evt)}
-          onError={e => console.log('e', e)}
         />
         
       </SafeAreaViewPlus>

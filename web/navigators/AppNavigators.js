@@ -9,8 +9,9 @@ import CustomPage from  '../views/CustomPage'
 import CustomThemePage from  '../views/CustomThemePage'
 import SortPage from  '../views/SortPage'
 import CodePushPage from '../views/CodePushPage'
+import HotLibraries from '../views/Awesomes/HotLibraries'
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from "react-navigation-redux-helpers";
-export const rootCom = 'Init' // 定义根路由
+export const rootCom = 'HomePage' // 定义根路由
 
 const InitialNavigator = createStackNavigator(
     {
@@ -23,7 +24,7 @@ const InitialNavigator = createStackNavigator(
     }
 )
 
-const MainNavigator = createStackNavigator(
+export const MainNavigator = createStackNavigator(
     {
         HomePage: {
             screen: HomePage,
@@ -78,6 +79,12 @@ const MainNavigator = createStackNavigator(
         },
         CodePushPage: {
             screen: CodePushPage,
+            navigationOptions: {
+                header: null
+            }
+        },
+        HotLibraries: {
+            screen: HotLibraries,
             navigationOptions: {
                 header: null
             }

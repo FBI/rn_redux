@@ -23,8 +23,8 @@ class MyPage extends Component{
     let routeName, params = { theme }
     switch(menu) {
       case moreMenuUtil.Tutorial: 
-            routeName = 'WebViewPage';
-            params.title = '教程';
+            routeName = 'HotLibraries';
+            params.title = '前端热门库';
            // params.theme = this.props.theme
             params.url = 'https://github.com/Solido/awesome-flutter';
             break;

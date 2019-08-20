@@ -6,6 +6,7 @@ import { StyleSheet } from 'react-native';
 
 export const ThemeFlags = {
     Default: '#2196F3',
+    Aquamarine: 'aquamarine',
     HotPink: 'hotpink',
     Turquoise: 'turquoise',
     Red: '#F44336',
