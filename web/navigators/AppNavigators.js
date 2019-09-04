@@ -13,16 +13,16 @@ import HotLibraries from '../views/Awesomes/HotLibraries'
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from "react-navigation-redux-helpers";
 export const rootCom = 'HomePage' // 定义根路由
 
-const InitialNavigator = createStackNavigator(
-    {
-        WelcomePage: {
-            screen: WelcomePage,
-            navigationOptions: {
-                header: null
-            }
-        }
-    }
-)
+// const InitialNavigator = createStackNavigator(
+//     {
+//         WelcomePage: {
+//             screen: WelcomePage,
+//             navigationOptions: {
+//                 header: null
+//             }
+//         }
+//     }
+// )
 
 export const MainNavigator = createStackNavigator(
     {
@@ -92,17 +92,17 @@ export const MainNavigator = createStackNavigator(
     }
 )
 
-export const RootNavigator =  createSwitchNavigator(
-    {
-        Init: InitialNavigator,
-        Main: MainNavigator
-    },
-    {
-        navigationOptions: {
-            header: null
-        }
-    }
-)
+// export const RootNavigator =  createSwitchNavigator(
+//     {
+//         Init: InitialNavigator,
+//         Main: MainNavigator
+//     },
+//     {
+//         navigationOptions: {
+//             header: null
+//         }
+//     }
+// )
 
 export const middleware = createReactNavigationReduxMiddleware(
     state => state.nav,

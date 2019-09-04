@@ -12,6 +12,7 @@
     "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-native": "0.59.8",
+    "react-native-amap3d": "^1.1.1",
     "react-native-check-box": "^2.1.7",
     "react-native-code-push": "^5.6.1",
     "react-native-easy-toast": "^1.2.0",
